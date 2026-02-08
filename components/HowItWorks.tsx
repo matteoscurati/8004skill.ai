@@ -43,9 +43,11 @@ export default function HowItWorks() {
             "Register my agent on-chain",
             "Search for agents that do summarization",
             "Load agent 11155111:42",
+            "Check the reputation of agent 11155111:42",
             "Give feedback to agent 11155111:42",
             "Configure 8004 for Sepolia",
             "Set up my wallet for my agent",
+            "Update my agent's description",
           ].map((prompt) => (
             <div key={prompt} className="flex items-start gap-2 text-foreground/70">
               <span className="text-vw-green">&gt;</span>

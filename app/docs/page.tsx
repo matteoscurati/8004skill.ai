@@ -43,7 +43,7 @@ export default function DocsPage() {
               </div>
               <div className="mt-4 gradient-border p-4">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">Prerequisites:</strong> Node.js &ge; 22.0.0, an AI agent compatible
+                  <strong className="text-vw-purple">Prerequisites:</strong> Node.js &ge; 22.0.0, macOS or Linux (Windows not supported), an AI agent compatible
                   with SKILL.md (Claude Code, OpenClaw, or similar).
                 </p>
               </div>
@@ -131,7 +131,8 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Chain Selection</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                The agent0 SDK ships with built-in defaults for <strong>3 chains</strong>: Ethereum Mainnet (1), Ethereum Sepolia (11155111), and Polygon Mainnet (137).
+                The agent0 SDK ships with full built-in defaults for <strong>Ethereum Mainnet</strong> (1) and <strong>Ethereum Sepolia</strong> (11155111).
+                <strong>Polygon Mainnet</strong> (137) has partial support (subgraph built-in, registry via env vars).
                 The recommended testnet for development is <strong>Ethereum Sepolia</strong>.
               </p>
 
@@ -441,15 +442,15 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">Powered by <a href="https://agent0.dev" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>.</strong>{" "}
+                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>.</strong>{" "}
                   The SDK ships with built-in defaults (registry addresses + subgraph URLs) for 3 chains.
                   Additional chains have contracts deployed but require <code>REGISTRY_ADDRESS_IDENTITY</code>, <code>REGISTRY_ADDRESS_REPUTATION</code>, and <code>SUBGRAPH_URL</code> env var overrides &mdash; SDK support coming soon.
                 </p>
               </div>
 
-              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">SDK Defaults (Ready to Use)</h3>
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Full SDK Support</h3>
               <p className="text-sm text-foreground/70 mb-3">
-                These chains work out of the box &mdash; no configuration overrides needed.
+                These chains work out of the box &mdash; built-in registry addresses and subgraph URLs, no overrides needed.
               </p>
               <div className="overflow-x-auto mb-6">
                 <table>
@@ -471,6 +472,24 @@ export default function DocsPage() {
                       <td>11155111</td>
                       <td><code className="text-xs break-all">gateway.thegraph.com/api/.../6wQRC7geo9XYAhckfmfo8kbMRLeWU8KQd3XsJqFKmZLT</code></td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Partial SDK Support</h3>
+              <p className="text-sm text-foreground/70 mb-3">
+                Subgraph URL is built-in, but registry addresses must be provided via <code>REGISTRY_ADDRESS_IDENTITY</code> and <code>REGISTRY_ADDRESS_REPUTATION</code> env vars.
+              </p>
+              <div className="overflow-x-auto mb-6">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Chain</th>
+                      <th>Chain ID</th>
+                      <th>Subgraph URL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     <tr>
                       <td>Polygon Mainnet</td>
                       <td>137</td>
@@ -565,32 +584,20 @@ export default function DocsPage() {
                       <td>URL of IPFS node API</td>
                     </tr>
                     <tr>
-                      <td><code>SEARCH_API_URL</code></td>
-                      <td>Semantic search (optional)</td>
-                      <td>Override URL for semantic search API</td>
-                    </tr>
-                    <tr>
-                      <td><code>SUBGRAPH_URL</code></td>
-                      <td>Non-default chains</td>
-                      <td>Subgraph URL for active chain</td>
-                    </tr>
-                    <tr>
-                      <td><code>REGISTRY_ADDRESS_IDENTITY</code></td>
-                      <td>Non-default chains</td>
-                      <td>Identity registry contract override</td>
-                    </tr>
-                    <tr>
-                      <td><code>REGISTRY_ADDRESS_REPUTATION</code></td>
-                      <td>Non-default chains</td>
-                      <td>Reputation registry contract override</td>
-                    </tr>
-                    <tr>
                       <td><code>DEBUG</code></td>
                       <td>Debugging (optional)</td>
                       <td>Set to 1 for verbose logging</td>
                     </tr>
                   </tbody>
                 </table>
+              </div>
+
+              <div className="gradient-border p-4 mb-4">
+                <p className="text-xs text-foreground/60">
+                  <strong className="text-vw-purple">Note:</strong> The three IPFS variables (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) are
+                  mutually exclusive &mdash; you only need the one that matches the provider you selected during configuration.
+                  IPFS is optional and only required for write operations that store metadata (agent registration, feedback with text).
+                </p>
               </div>
 
               <p className="text-sm text-foreground/70 mb-4 leading-relaxed">
@@ -729,7 +736,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">I/O Contract</h3>
               <p className="text-sm text-foreground/70 mb-3">
-                All 14 scripts follow the same I/O protocol:
+                All 13 scripts follow the same I/O protocol:
               </p>
               <div className="overflow-x-auto mb-6">
                 <table>
@@ -758,7 +765,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">ERC-8004 Protocol</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Three lightweight registries accessed via <a href="https://agent0.dev" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>:
+                Three lightweight registries accessed via <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>:
               </p>
               <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-1 mb-4">
                 <li><strong className="text-vw-purple">Identity Registry (ERC-721):</strong> Agent IDs as NFTs with IPFS/HTTP metadata</li>

@@ -1,7 +1,10 @@
 export default function Chains() {
-  const sdkDefaults = [
+  const sdkFull = [
     { name: "Ethereum Mainnet", id: 1 },
     { name: "Ethereum Sepolia", id: 11155111 },
+  ];
+
+  const sdkPartial = [
     { name: "Polygon Mainnet", id: 137 },
   ];
 
@@ -22,24 +25,43 @@ export default function Chains() {
         Supported Chains
       </h2>
       <p className="text-center text-foreground/60 mb-12 text-sm">
-        Powered by <a href="https://agent0.dev" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>. Three chains with built-in defaults &mdash; more coming soon.
+        Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>. Three chains with built-in defaults &mdash; more coming soon.
       </p>
 
       <div className="space-y-8">
-        {/* SDK Defaults */}
+        {/* SDK Full Support */}
         <div>
           <h3 className="text-sm font-bold text-vw-green mb-4 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-vw-green animate-pulse" />
-            SDK Defaults (Ready to Use)
+            Full SDK Support (Ready to Use)
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {sdkDefaults.map((chain) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {sdkFull.map((chain) => (
               <div
                 key={chain.id}
                 className="gradient-border p-4 text-center hover:translate-y-[-2px] transition-transform"
               >
                 <div className="font-heading font-bold text-sm text-foreground/90">{chain.name}</div>
                 <div className="text-xs text-vw-green/70 mt-1">Chain ID: {chain.id}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* SDK Partial Support */}
+        <div>
+          <h3 className="text-sm font-bold text-vw-cyan mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-vw-cyan animate-pulse" />
+            Partial SDK Support (Subgraph Built-in, Registry via Env Vars)
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {sdkPartial.map((chain) => (
+              <div
+                key={chain.id}
+                className="gradient-border p-4 text-center hover:translate-y-[-2px] transition-transform"
+              >
+                <div className="font-heading font-bold text-sm text-foreground/90">{chain.name}</div>
+                <div className="text-xs text-vw-cyan/70 mt-1">Chain ID: {chain.id}</div>
               </div>
             ))}
           </div>

@@ -40,7 +40,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://agent0.dev" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-vw-cyan transition-colors">
+                <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-vw-cyan transition-colors">
                   agent0 SDK
                 </a>
               </li>

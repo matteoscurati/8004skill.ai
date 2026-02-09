@@ -152,8 +152,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Chain Selection</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                The agent0 SDK ships with full built-in defaults for <strong>Ethereum Mainnet</strong> (1) and <strong>Ethereum Sepolia</strong> (11155111).
-                <strong>Polygon Mainnet</strong> (137) has partial support (subgraph built-in, registry via env vars).
+                The agent0 SDK ships with full built-in defaults for <strong>Ethereum Mainnet</strong> (1), <strong>Polygon Mainnet</strong> (137), and <strong>Ethereum Sepolia</strong> (11155111).
                 The recommended testnet for development is <strong>Ethereum Sepolia</strong>.
               </p>
 
@@ -465,7 +464,7 @@ export default function DocsPage() {
                 <p className="text-xs text-foreground/60">
                   <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>.</strong>{" "}
                   The SDK ships with built-in defaults (registry addresses + subgraph URLs) for 3 chains.
-                  Additional chains have contracts deployed but require <code>REGISTRY_ADDRESS_IDENTITY</code>, <code>REGISTRY_ADDRESS_REPUTATION</code>, and <code>SUBGRAPH_URL</code> env var overrides &mdash; SDK support coming soon.
+                  Additional chains have contracts deployed but require <code>SUBGRAPH_URL</code> env var overrides &mdash; SDK support coming soon.
                 </p>
               </div>
 
@@ -489,32 +488,14 @@ export default function DocsPage() {
                       <td><code className="text-xs break-all">gateway.thegraph.com/api/.../FV6RR6y13rsnCxBAicKuQEwDp8ioEGiNaWaZUmvr1F8k</code></td>
                     </tr>
                     <tr>
-                      <td>Ethereum Sepolia</td>
-                      <td>11155111</td>
-                      <td><code className="text-xs break-all">gateway.thegraph.com/api/.../6wQRC7geo9XYAhckfmfo8kbMRLeWU8KQd3XsJqFKmZLT</code></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Partial SDK Support</h3>
-              <p className="text-sm text-foreground/70 mb-3">
-                Subgraph URL is built-in, but registry addresses must be provided via <code>REGISTRY_ADDRESS_IDENTITY</code> and <code>REGISTRY_ADDRESS_REPUTATION</code> env vars.
-              </p>
-              <div className="overflow-x-auto mb-6">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Chain</th>
-                      <th>Chain ID</th>
-                      <th>Subgraph URL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
                       <td>Polygon Mainnet</td>
                       <td>137</td>
                       <td><code className="text-xs break-all">gateway.thegraph.com/api/.../9q16PZv1JudvtnCAf44cBoxg82yK9SSsFvrjCY9xnneF</code></td>
+                    </tr>
+                    <tr>
+                      <td>Ethereum Sepolia</td>
+                      <td>11155111</td>
+                      <td><code className="text-xs break-all">gateway.thegraph.com/api/.../6wQRC7geo9XYAhckfmfo8kbMRLeWU8KQd3XsJqFKmZLT</code></td>
                     </tr>
                   </tbody>
                 </table>

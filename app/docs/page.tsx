@@ -174,13 +174,13 @@ export default function DocsPage() {
               </p>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Config File Format</h3>
+              <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
+                Only two user-facing fields. Chain, RPC, and registrations are managed automatically by the agent.
+              </p>
               <CodeBlock
                 code={`{
-  "activeChain": 11155111,
-  "rpcUrl": "https://rpc.sepolia.org",
   "ipfs": "pinata",
-  "wcProjectId": "optional-walletconnect-project-id",
-  "registrations": {}
+  "wcProjectId": "optional-walletconnect-project-id"
 }`}
                 language="json"
                 filename="~/.8004skill/config.json"
@@ -195,11 +195,8 @@ export default function DocsPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td><code>activeChain</code></td><td>Chain ID for the active network</td></tr>
-                    <tr><td><code>rpcUrl</code></td><td>RPC endpoint for the active chain</td></tr>
-                    <tr><td><code>ipfs</code></td><td>IPFS pinning provider (pinata, filecoinPin, node, or null)</td></tr>
-                    <tr><td><code>wcProjectId</code></td><td>WalletConnect project ID (optional; a default is provided)</td></tr>
-                    <tr><td><code>registrations</code></td><td>Record of agents you have registered, keyed by chain ID</td></tr>
+                    <tr><td><code>ipfs</code></td><td>IPFS provider (<code>pinata</code>, <code>filecoinPin</code>, <code>node</code>, or <code>null</code>). Credential prompted inline if not in env</td></tr>
+                    <tr><td><code>wcProjectId</code></td><td>WalletConnect project ID (a default is provided)</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -554,6 +551,7 @@ export default function DocsPage() {
                   mutually exclusive &mdash; you only need the one that matches your provider.
                   IPFS is only required for write operations that store metadata (agent registration, feedback with text).
                   Setting env vars is optional &mdash; if not set, the agent will prompt for credentials inline during the operation.
+                  If a credential is not set when needed, the agent will prompt for it inline (not persisted).
                 </p>
               </div>
 

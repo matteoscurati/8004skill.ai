@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import DocsSidebar from "@/components/DocsSidebar";
 import CodeBlock from "@/components/CodeBlock";
+import BetaBanner from "@/components/BetaBanner";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -32,7 +33,10 @@ export const metadata: Metadata = {
 export default function DocsPage() {
   return (
     <div className="relative bg-[#0D0221] min-h-screen">
-      <div className="pt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="pt-20">
+        <BetaBanner />
+      </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex gap-10 py-10">
           <DocsSidebar />
 

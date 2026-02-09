@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import BetaBanner from "@/components/BetaBanner";
 import VaporwaveScene from "@/components/VaporwaveScene";
 
 const spaceMono = Space_Mono({
@@ -98,6 +99,7 @@ export default function RootLayout({
       <body className={`${spaceMono.variable} ${outfit.variable} antialiased`}>
         <VaporwaveScene />
         <Navbar />
+        <BetaBanner />
         <div className="relative z-10">
           {children}
         </div>

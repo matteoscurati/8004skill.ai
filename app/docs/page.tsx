@@ -5,7 +5,28 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Documentation — 8004skill",
-  description: "Complete documentation for the 8004skill AI agent skill. Installation, configuration, operations reference, and more.",
+  description:
+    "Complete documentation for the 8004skill AI agent skill. Installation, configuration, operations reference, and more.",
+  alternates: { canonical: "/docs" },
+  openGraph: {
+    title: "Documentation — 8004skill",
+    description:
+      "Complete documentation for the 8004skill AI agent skill. Installation, configuration, operations reference, and more.",
+    type: "article",
+  },
+  twitter: {
+    card: "summary",
+    title: "Documentation — 8004skill",
+    description:
+      "Complete documentation for the 8004skill AI agent skill. Installation, configuration, operations reference, and more.",
+  },
+  keywords: [
+    "ERC-8004",
+    "documentation",
+    "AI agent",
+    "agent skill",
+    "Claude Code",
+  ],
 };
 
 export default function DocsPage() {

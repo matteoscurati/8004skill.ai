@@ -25,15 +25,20 @@ export default function Hero() {
           8004skill
         </h1>
 
-        <p
-          className="text-lg sm:text-xl md:text-2xl font-heading font-medium mb-4 neon-flicker"
-          style={{
-            color: "#01CDFE",
-            textShadow: "0 0 10px #01CDFE, 0 0 20px #01CDFE",
-          }}
-        >
-          The AI Agent Skill for the On-Chain Agent Economy
-        </p>
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <p
+            className="text-lg sm:text-xl md:text-2xl font-heading font-medium neon-flicker"
+            style={{
+              color: "#01CDFE",
+              textShadow: "0 0 10px #01CDFE, 0 0 20px #01CDFE",
+            }}
+          >
+            The AI Agent Skill for the On-Chain Agent Economy
+          </p>
+          <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-vw-green/40 text-vw-green/80 whitespace-nowrap">
+            v1.2.0
+          </span>
+        </div>
 
         <p className="text-sm sm:text-base text-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
           Register, discover, and rate AI agents on Ethereum, Polygon &amp; Sepolia.

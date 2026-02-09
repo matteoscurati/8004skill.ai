@@ -3,7 +3,7 @@ export default function Features() {
     {
       emoji: "⚙️",
       title: "Configure",
-      desc: "Set up chain, RPC, IPFS provider, and WalletConnect session",
+      desc: "Set up chain, RPC, and WalletConnect session. IPFS credentials prompted on demand",
     },
     {
       emoji: "📝",

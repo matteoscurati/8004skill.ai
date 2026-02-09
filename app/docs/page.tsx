@@ -115,11 +115,11 @@ export default function DocsPage() {
                 After installing, the skill is available via the <code>/8004skill</code> slash command or natural language.
               </p>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Claude Code inherits your shell environment. Set env vars before launching, or define them
-                in <code>~/.8004skill/.env</code> (shell values take precedence):
+                Claude Code inherits your shell environment. IPFS credentials are prompted inline when needed,
+                but you can optionally pre-configure them via env vars or <code>~/.8004skill/.env</code>:
               </p>
               <CodeBlock
-                code={`# Option A: shell export\nexport PINATA_JWT=your_pinata_jwt\nclaude\n\n# Option B: .env file (loaded automatically)\ncp .env.example ~/.8004skill/.env\nchmod 600 ~/.8004skill/.env`}
+                code={`# Optional: pre-configure env vars (prompted inline if not set)\nexport PINATA_JWT=your_pinata_jwt\nclaude\n\n# Or use a .env file (loaded automatically)\ncp .env.example ~/.8004skill/.env\nchmod 600 ~/.8004skill/.env`}
                 language="bash"
               />
 
@@ -162,12 +162,13 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">IPFS Providers</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Agent metadata is stored on IPFS. Three provider options are supported:
+                Agent metadata is stored on IPFS. Three provider options are supported.
+                Credentials are requested inline during operations that need them &mdash; no pre-configuration required.
               </p>
               <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1 mb-4">
-                <li><strong className="text-vw-purple">Pinata</strong> &mdash; Requires <code>PINATA_JWT</code> environment variable</li>
-                <li><strong className="text-vw-purple">Filecoin</strong> &mdash; Requires <code>FILECOIN_PRIVATE_KEY</code> environment variable</li>
-                <li><strong className="text-vw-purple">Local Node</strong> &mdash; Requires <code>IPFS_NODE_URL</code> environment variable</li>
+                <li><strong className="text-vw-purple">Pinata</strong> &mdash; <code>PINATA_JWT</code> (env var or prompted inline)</li>
+                <li><strong className="text-vw-purple">Filecoin</strong> &mdash; <code>FILECOIN_PRIVATE_KEY</code> (env var or prompted inline)</li>
+                <li><strong className="text-vw-purple">Local Node</strong> &mdash; <code>IPFS_NODE_URL</code> (env var or prompted inline)</li>
               </ul>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">WalletConnect</h3>
@@ -218,7 +219,7 @@ export default function DocsPage() {
               <div className="mb-10">
                 <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Configure</h3>
                 <p className="text-sm text-foreground/70 mb-3">
-                  Set up chain, RPC URL, IPFS provider, and WalletConnect session.
+                  Set up chain, RPC URL, and WalletConnect session.
                 </p>
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
@@ -228,8 +229,8 @@ export default function DocsPage() {
                 </div>
                 <p className="text-sm text-foreground/70">
                   The wizard guides you through: choosing a supported EVM chain, configuring the RPC endpoint,
-                  setting an IPFS provider, configuring WalletConnect project ID, pairing your wallet via QR code,
-                  and running preflight checks.
+                  configuring WalletConnect project ID, pairing your wallet via QR code,
+                  and running preflight checks. IPFS credentials are prompted inline when needed.
                 </p>
               </div>
 
@@ -242,7 +243,7 @@ export default function DocsPage() {
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
                     <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;register agent&quot;, &quot;create agent&quot;, &quot;mint agent NFT&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, IPFS provider, gas tokens</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, gas tokens</span></div>
                   </div>
                 </div>
                 <p className="text-sm text-foreground/70 mb-3">
@@ -338,7 +339,7 @@ export default function DocsPage() {
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
                     <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;respond to feedback&quot;, &quot;reply to review&quot;, &quot;answer feedback&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership, IPFS provider</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership</span></div>
                   </div>
                 </div>
                 <p className="text-sm text-foreground/70">
@@ -448,7 +449,7 @@ export default function DocsPage() {
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
                     <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;update agent&quot;, &quot;edit agent&quot;, &quot;add MCP endpoint&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, IPFS provider, agent ownership</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership</span></div>
                   </div>
                 </div>
                 <p className="text-sm text-foreground/70">
@@ -554,8 +555,9 @@ export default function DocsPage() {
               <div className="gradient-border p-4 mb-4">
                 <p className="text-xs text-foreground/60">
                   <strong className="text-vw-purple">Note:</strong> The three IPFS variables (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) are
-                  mutually exclusive &mdash; you only need the one that matches the provider you selected during configuration.
-                  IPFS is optional and only required for write operations that store metadata (agent registration, feedback with text).
+                  mutually exclusive &mdash; you only need the one that matches your provider.
+                  IPFS is only required for write operations that store metadata (agent registration, feedback with text).
+                  Setting env vars is optional &mdash; if not set, the agent will prompt for credentials inline during the operation.
                 </p>
               </div>
 

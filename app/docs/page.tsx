@@ -464,7 +464,6 @@ export default function DocsPage() {
                 <p className="text-xs text-foreground/60">
                   <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>.</strong>{" "}
                   The SDK ships with built-in defaults (registry addresses + subgraph URLs) for 3 chains.
-                  Additional chains have contracts deployed but require <code>SUBGRAPH_URL</code> env var overrides &mdash; SDK support coming soon.
                 </p>
               </div>
 
@@ -501,52 +500,6 @@ export default function DocsPage() {
                 </table>
               </div>
 
-              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Contracts Deployed (SDK Support Coming Soon)</h3>
-              <p className="text-sm text-foreground/70 mb-3">
-                ERC-8004 registries are deployed on these chains via CREATE2 (with <code>0x8004</code> vanity prefix), but the agent0 SDK does not yet include built-in defaults.
-                Use env var overrides to connect.
-              </p>
-              <div className="overflow-x-auto mb-6">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Chain</th>
-                      <th>Chain ID</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      ["Base", "8453"],
-                      ["BSC", "56"],
-                      ["Monad", "143"],
-                      ["Scroll", "534352"],
-                      ["Gnosis", "100"],
-                      ["Arbitrum", "42161"],
-                      ["Celo", "42220"],
-                      ["Taiko", "167000"],
-                      ["Base Sepolia", "84532"],
-                      ["BSC Chapel", "97"],
-                      ["Monad Testnet", "10143"],
-                      ["Scroll Testnet", "534351"],
-                      ["Arbitrum Sepolia", "421614"],
-                      ["Celo Alfajores", "44787"],
-                      ["Polygon Amoy", "80002"],
-                    ].map(([name, id]) => (
-                      <tr key={id}>
-                        <td>{name}</td>
-                        <td>{id}</td>
-                        <td><span className="text-foreground/40">Requires overrides</span></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Planned</h3>
-              <p className="text-sm text-foreground/70">
-                Linea Sepolia (59141), Hedera Testnet (296), HyperEVM Testnet (998), SKALE Base Sepolia (1351057110) &mdash; contracts not yet deployed.
-              </p>
             </section>
 
             {/* Environment Variables */}

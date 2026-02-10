@@ -41,11 +41,6 @@ export default function Features() {
       desc: "Prove or verify agent identity using cryptographic signatures",
     },
     {
-      emoji: "👤",
-      title: "Whoami",
-      desc: "View your own agent's identity, status, reputation, and endpoints",
-    },
-    {
       emoji: "✏️",
       title: "Update Agent",
       desc: "Modify agent metadata, endpoints, OASF skills, status, and trust models",
@@ -60,7 +55,7 @@ export default function Features() {
   return (
     <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-pink" style={{ textShadow: "0 0 10px #FF71CE" }}>
-        11 Core Operations
+        10 Core Operations
       </h2>
       <p className="text-center text-foreground/60 mb-12 max-w-xl mx-auto text-sm">
         Everything you need to manage AI agents on-chain, through natural conversation.

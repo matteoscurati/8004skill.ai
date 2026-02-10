@@ -415,24 +415,6 @@ export default function DocsPage() {
                 </p>
               </div>
 
-              {/* Whoami */}
-              <div className="mb-10">
-                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Whoami</h3>
-                <p className="text-sm text-foreground/70 mb-3">
-                  View your own agent&apos;s identity, status, and reputation.
-                </p>
-                <div className="gradient-border p-4 mb-3">
-                  <div className="text-xs space-y-2">
-                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;whoami&quot;, &quot;my agents&quot;, &quot;who am I&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">Chain selection. Optional WalletConnect for identity proof</span></div>
-                  </div>
-                </div>
-                <p className="text-sm text-foreground/70">
-                  Shows your agent profile from config: name, ID, active/inactive status, trust label with rating,
-                  wallet address, owners list, endpoints, and identity verification status.
-                </p>
-              </div>
-
               {/* Update Agent */}
               <div className="mb-10">
                 <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Update Agent</h3>

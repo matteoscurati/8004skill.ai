@@ -33,7 +33,7 @@ export default function Features() {
     {
       emoji: "💰",
       title: "Wallet",
-      desc: "Set, get, or unset an agent's on-chain wallet with EIP-712 signatures",
+      desc: "Set, get, or unset an agent's on-chain wallet. Signing via WalletConnect.",
     },
     {
       emoji: "✅",

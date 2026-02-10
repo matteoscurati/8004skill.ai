@@ -391,7 +391,7 @@ export default function DocsPage() {
                 </div>
                 <p className="text-sm text-foreground/70">
                   Enable agents to receive payments, prove agent identity, and submit feedback from the agent&apos;s wallet.
-                  Setting a wallet requires an EIP-712 signature for security.
+                  Setting a wallet requires signing via WalletConnect for security.
                 </p>
               </div>
 

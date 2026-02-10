@@ -547,13 +547,15 @@ export default function DocsPage() {
               />
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Secret Management Recommendations</h3>
-              <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
-                <li><strong className="text-vw-purple">~/.8004skill/.env file</strong> (simplest) &mdash; loaded automatically by every script</li>
-                <li>macOS Keychain</li>
-                <li>1Password CLI with <code>op run</code></li>
-                <li>direnv with <code>.envrc</code></li>
-                <li>Never hardcode secrets in shell profiles or commit to source control</li>
-              </ul>
+              <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
+                How credentials are resolved: IPFS credentials (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) are
+                read from environment variables. You can set them in <code>~/.8004skill/.env</code> (loaded automatically),
+                export them in your shell, or let the agent prompt you inline when needed. Any tool that injects
+                env vars (1Password CLI, direnv, etc.) also works.
+              </p>
+              <p className="text-sm text-foreground/70">
+                Never hardcode secrets in shell profiles or commit them to source control.
+              </p>
             </section>
 
             {/* Security Model */}

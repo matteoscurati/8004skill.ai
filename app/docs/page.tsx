@@ -704,6 +704,85 @@ export default function DocsPage() {
               </p>
             </section>
 
+            {/* X402 Payment Integration */}
+            <section id="x402-integration" className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
+                X402 Payment Integration
+              </h2>
+
+              <p className="text-sm text-foreground/70 leading-relaxed mb-6">
+                X402 is an HTTP-based payment protocol (HTTP 402 Payment Required) enabling pay-per-request access to agent endpoints.
+                8004skill handles <strong className="text-vw-purple">identity and signing</strong>; the Coinbase <code>awal</code> CLI handles <strong className="text-vw-purple">payments and monetization</strong>.
+              </p>
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">How It Works</h3>
+              <div className="overflow-x-auto mb-6">
+                <table>
+                  <thead>
+                    <tr><th>Concern</th><th>Tool</th><th>Wallet Model</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Identity, registration, metadata, signing</td><td><strong>8004skill</strong></td><td>WalletConnect v2 (non-custodial)</td></tr>
+                    <tr><td>Payments, discovery, monetization</td><td><strong>awal</strong></td><td>Coinbase custodial wallet</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Enabling X402</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed mb-3">
+                Pass <code>--x402 true</code> when registering or updating an agent to flag it as x402-capable.
+              </p>
+              <CodeBlock code="npx tsx scripts/update-agent.ts --agent-id 8453:42 --chain-id 8453 --rpc-url https://mainnet.base.org --ipfs pinata --x402 true" language="bash" />
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Payment Readiness</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed mb-3">
+                An agent is &ldquo;payment-ready&rdquo; when all four conditions are met:
+              </p>
+              <div className="gradient-border p-4 mb-4">
+                <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-1">
+                  <li><code>x402support: true</code> &mdash; enabled via <code>--x402 true</code></li>
+                  <li><strong className="text-vw-green">Active</strong> status &mdash; <code>--active true</code> (default)</li>
+                  <li><strong className="text-vw-green">Wallet</strong> address set &mdash; Operation 7 (wallet set)</li>
+                  <li>At least one <strong className="text-vw-green">endpoint</strong> &mdash; MCP, A2A, or web</li>
+                </ol>
+              </div>
+              <p className="text-sm text-foreground/70 leading-relaxed mb-3">
+                Check readiness with the x402-status script:
+              </p>
+              <CodeBlock code="npx tsx scripts/x402-status.ts --agent-id 8453:42 --chain-id 8453 --rpc-url https://mainnet.base.org" language="bash" />
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">awal CLI Companion</h3>
+              <div className="gradient-border p-4 mb-4">
+                <p className="text-xs text-vw-pink font-bold mb-2">
+                  Note: <code>awal</code> is a separate Coinbase tool &mdash; not bundled with or required by 8004skill.
+                </p>
+              </div>
+              <div className="overflow-x-auto mb-6">
+                <table>
+                  <thead>
+                    <tr><th>Command</th><th>Purpose</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>npx awal x402 details &lt;url&gt;</code></td><td>Inspect x402 pricing on an endpoint</td></tr>
+                    <tr><td><code>npx awal x402 pay &lt;url&gt;</code></td><td>Pay and call an x402 endpoint</td></tr>
+                    <tr><td><code>npx awal x402 bazaar search &quot;&lt;query&gt;&quot;</code></td><td>Discover monetized agents</td></tr>
+                    <tr><td><code>npm install express x402-express</code></td><td>Add x402 paywall to your own endpoint</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Workflow</h3>
+              <div className="gradient-border p-4 mb-6">
+                <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-1">
+                  <li><strong className="text-vw-purple">Register</strong> agent with 8004skill (identity, endpoints, OASF)</li>
+                  <li><strong className="text-vw-purple">Enable x402</strong>: <code>--x402 true</code> on register or update</li>
+                  <li><strong className="text-vw-purple">Set wallet</strong>: Operation 7 (receives USDC payments)</li>
+                  <li><strong className="text-vw-purple">Monetize</strong>: use <code>x402-express</code> middleware on your server</li>
+                  <li><strong className="text-vw-purple">Discover + pay</strong>: clients use <code>awal</code> to find and pay your agent</li>
+                </ol>
+              </div>
+            </section>
+
             {/* Architecture */}
             <section id="architecture" className="mb-16">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
@@ -729,7 +808,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">I/O Contract</h3>
               <p className="text-sm text-foreground/70 mb-3">
-                All 14 scripts follow the same I/O protocol:
+                All 15 scripts follow the same I/O protocol:
               </p>
               <div className="overflow-x-auto mb-6">
                 <table>
@@ -750,7 +829,7 @@ export default function DocsPage() {
                 <li>ESM-only TypeScript project</li>
                 <li>No build step at runtime (tsx compiles on-the-fly)</li>
                 <li>Stateless scripts (each invocation is standalone)</li>
-                <li>14 TypeScript scripts + 3 shared library files</li>
+                <li>15 TypeScript scripts + 3 shared library files</li>
                 <li>State lives in <code>~/.8004skill/config.json</code> and environment variables</li>
                 <li>Distributed via <code>npx skills add</code> (Skills CLI) or <code>npx 8004skill install</code></li>
                 <li>CLI entry point (<code>bin/cli.mjs</code>) is vanilla ESM JS &mdash; runs via npx without tsx</li>

@@ -11,6 +11,7 @@ const sections = [
   { id: "supported-chains", label: "Supported Chains" },
   { id: "environment-variables", label: "Environment Variables" },
   { id: "security-model", label: "Security Model" },
+  { id: "x402-integration", label: "X402 Payments" },
   { id: "architecture", label: "Architecture" },
   { id: "cli-management", label: "CLI Management" },
 ];

@@ -19,8 +19,8 @@ export default function HowItWorks() {
       {/* Flow diagram */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0">
         {steps.map((step, i) => (
-          <div key={step.label} className="flex flex-col md:flex-row items-center">
-            <div className="gradient-border p-6 text-center min-w-[160px] hover:translate-y-[-2px] transition-transform">
+          <div key={step.label} className="flex flex-col md:flex-row items-center w-full md:w-auto">
+            <div className="gradient-border p-6 text-center w-full md:w-auto md:min-w-[160px] hover:translate-y-[-2px] transition-transform">
               <div className="text-3xl mb-2">{step.icon}</div>
               <div className="font-heading font-bold text-vw-pink text-sm">{step.label}</div>
               <div className="text-xs text-foreground/60 mt-1">{step.desc}</div>

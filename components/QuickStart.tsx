@@ -6,7 +6,7 @@ export default function QuickStart() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText("npx 8004skill install");
+    await navigator.clipboard.writeText("npx skills add matteoscurati/8004skill -g");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -38,7 +38,7 @@ export default function QuickStart() {
             <span className="text-foreground/40"># Step 1: Install the skill</span>
             {"\n"}
             <span className="text-vw-green">$</span>{" "}
-            <span className="text-foreground">npx 8004skill install</span>
+            <span className="text-foreground">npx skills add matteoscurati/8004skill -g</span>
             {"\n\n"}
             <span className="text-foreground/40"># Step 2: Configure your chain</span>
             {"\n"}
@@ -66,7 +66,7 @@ export default function QuickStart() {
 
       <div className="mt-6 text-center">
         <p className="text-xs text-foreground/40">
-          Requires Node.js &ge; 22.0.0 &middot; Compatible with Claude Code, OpenClaw, and any SKILL.md agent
+          Requires Node.js &ge; 22.0.0 &middot; Compatible with Claude Code, Cursor, Codex, and 35+ more agents
         </p>
       </div>
     </section>

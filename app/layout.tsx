@@ -18,7 +18,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://8004skill.ai"),
+  metadataBase: new URL("https://www.8004skill.ai"),
   alternates: { canonical: "/" },
   title: "8004skill — AI Agent Skill for the On-Chain Agent Economy",
   description:
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Register, discover, and rate AI agents on Ethereum, Polygon & Sepolia. Powered by agent0 SDK. No CLI flags. Just talk.",
     type: "website",
-    url: "https://8004skill.ai",
+    url: "https://www.8004skill.ai",
   },
   twitter: {
     card: "summary_large_image",
@@ -63,7 +63,7 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 name: "8004skill",
-                url: "https://8004skill.ai",
+                url: "https://www.8004skill.ai",
                 description:
                   "The AI Agent Skill for the On-Chain Agent Economy. Register, discover, and rate AI agents on Ethereum, Polygon & Sepolia.",
               },
@@ -71,8 +71,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 name: "8004skill",
-                url: "https://8004skill.ai",
-                logo: "https://8004skill.ai/favicon.ico",
+                url: "https://www.8004skill.ai",
+                logo: "https://www.8004skill.ai/favicon.ico",
                 sameAs: [
                   "https://github.com/matteoscurati/8004skill",
                   "https://www.npmjs.com/package/8004skill",

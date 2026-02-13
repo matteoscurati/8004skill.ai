@@ -6,7 +6,7 @@ export default function Hero() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText("npx 8004skill install");
+    await navigator.clipboard.writeText("npx skills add matteoscurati/8004skill -g");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -36,7 +36,7 @@ export default function Hero() {
             The AI Agent Skill for the On-Chain Agent Economy
           </p>
           <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-vw-green/40 text-vw-green/80 whitespace-nowrap">
-            v1.2.0
+            v1.3.0
           </span>
         </div>
 
@@ -53,7 +53,7 @@ export default function Hero() {
             className="group flex items-center gap-3 px-6 py-3 rounded-lg bg-vw-deep/80 border border-vw-pink/40 hover:border-vw-pink transition-all hover:shadow-[0_0_20px_rgba(255,113,206,0.3)]"
           >
             <code className="text-sm text-vw-green">
-              <span className="text-vw-purple">$</span> npx 8004skill install
+              <span className="text-vw-purple">$</span> npx skills add matteoscurati/8004skill -g
             </code>
             <span className="text-xs text-vw-purple group-hover:text-vw-pink transition-colors">
               {copied ? "Copied!" : "Copy"}

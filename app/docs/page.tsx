@@ -49,7 +49,7 @@ export default function DocsPage() {
               <div className="space-y-4">
                 <div>
                   <h3 className="text-sm font-bold text-vw-cyan mb-2">1. Install</h3>
-                  <CodeBlock code="npx 8004skill install" language="bash" />
+                  <CodeBlock code="npx skills add matteoscurati/8004skill -g" language="bash" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-vw-cyan mb-2">2. Configure</h3>
@@ -76,9 +76,16 @@ export default function DocsPage() {
                 Installation
               </h2>
 
-              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">npx (Recommended)</h3>
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Skills CLI (Recommended)</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                The fastest way to install. This command copies the skill files into your agent&apos;s skill directory.
+                Universal install via the <a href="https://github.com/vercel-labs/skills" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">Vercel Skills CLI</a>.
+                Supports Claude Code, Cursor, Codex, and 35+ more agents. Symlinks by default.
+              </p>
+              <CodeBlock code="npx skills add matteoscurati/8004skill -g" language="bash" />
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-8">npx</h3>
+              <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
+                Original installer with richer features (doctor checks, auto-dependency install). Supports Claude Code and OpenClaw.
               </p>
               <CodeBlock code="npx 8004skill install" language="bash" />
 
@@ -133,8 +140,10 @@ export default function DocsPage() {
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-8">Other Agents</h3>
               <p className="text-sm text-foreground/70 leading-relaxed">
                 8004skill follows the <a href="https://agentskills.io" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">Agent Skills</a> convention.
-                Any agent that reads SKILL.md files can use it. Clone the repo, run <code>npm install</code>, then point
-                your agent to the <code>SKILL.md</code> file via skills directory symlink, config path, or inline context.
+                The <a href="https://github.com/vercel-labs/skills" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">Skills CLI</a> auto-detects
+                installed agents (Cursor, Codex, Windsurf, Cline, Continue, and more). For unsupported agents,
+                clone the repo, run <code>npm install</code>, then point your agent to the <code>SKILL.md</code> file
+                via skills directory symlink, config path, or inline context.
               </p>
             </section>
 
@@ -320,25 +329,37 @@ export default function DocsPage() {
                 <h4 className="text-sm font-bold text-vw-green mb-2">Sub-operations</h4>
                 <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
                   <li><strong>Revoke Feedback</strong> &mdash; Remove previously given feedback</li>
+                  <li><strong>Respond to Feedback</strong> &mdash; Agent owners can reply to on-chain feedback with a text response stored on IPFS and linked on-chain. Only the agent owner can respond.</li>
                 </ul>
               </div>
 
-              {/* Respond to Feedback */}
+              {/* Whoami */}
               <div className="mb-10">
-                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Respond to Feedback</h3>
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Whoami</h3>
                 <p className="text-sm text-foreground/70 mb-3">
-                  Agent owners can reply to on-chain feedback with text responses.
+                  Resolve your agent from config or wallet and display a full identity card.
                 </p>
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
-                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;respond to feedback&quot;, &quot;reply to review&quot;, &quot;answer feedback&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership</span></div>
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;whoami&quot;, &quot;my agents&quot;, &quot;who am I&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">Config with registrations, or WalletConnect session</span></div>
                   </div>
                 </div>
-                <p className="text-sm text-foreground/70">
-                  Compose a text response to a specific feedback entry. The response is stored on IPFS and linked
-                  on-chain to the original feedback. Only the agent owner can respond.
+                <p className="text-sm text-foreground/70 mb-3">
+                  Resolves agent ID from config registrations, user-provided ID, or wallet address search.
+                  Runs load-agent, reputation, and wallet scripts sequentially. If a WalletConnect session is active,
+                  also signs an identity proof.
                 </p>
+                <h4 className="text-sm font-bold text-vw-green mb-2">Result Card</h4>
+                <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
+                  <li><strong>Agent</strong> &mdash; name + ID</li>
+                  <li><strong>Status</strong> &mdash; active/inactive</li>
+                  <li><strong>Trust</strong> &mdash; trust label</li>
+                  <li><strong>Wallet</strong> &mdash; on-chain wallet address</li>
+                  <li><strong>Owners</strong> &mdash; current owner(s)</li>
+                  <li><strong>Endpoints</strong> &mdash; MCP, A2A, Web</li>
+                  <li><strong>Identity Proof</strong> &mdash; verified or &quot;connect wallet via wc-pair.ts&quot;</li>
+                </ul>
               </div>
 
               {/* Inspect */}
@@ -415,22 +436,45 @@ export default function DocsPage() {
                 </p>
               </div>
 
-              {/* Update Agent */}
+              {/* Update Agent (sub-flow) */}
               <div className="mb-10">
-                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Update Agent</h3>
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Update Agent <span className="text-xs font-mono text-foreground/40 ml-2">(sub-flow)</span></h3>
                 <p className="text-sm text-foreground/70 mb-3">
                   Modify existing agent metadata and configuration.
                 </p>
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
                     <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;update agent&quot;, &quot;edit agent&quot;, &quot;add MCP endpoint&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership, IPFS provider</span></div>
                   </div>
                 </div>
                 <p className="text-sm text-foreground/70">
                   Update name, description, image. Add/change/remove endpoints (MCP, A2A, ENS).
                   Modify OASF skills/domains. Set active status. Configure trust models. Manage metadata.
                 </p>
+              </div>
+
+              {/* Transfer Agent */}
+              <div className="mb-10">
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Transfer Agent</h3>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Transfer agent ownership to a new address. This is irreversible.
+                </p>
+                <div className="gradient-border p-4 mb-3">
+                  <div className="text-xs space-y-2">
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;transfer agent&quot;, &quot;change agent owner&quot;, &quot;give agent to&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session, agent ownership</span></div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Takes an agent ID and new owner address (0x). Shows current owner vs new owner and requires explicit confirmation.
+                </p>
+                <div className="gradient-border p-4 border-red-400/30">
+                  <p className="text-xs text-red-400">
+                    <strong>Warning:</strong> This is irreversible. You will lose control of the agent after transfer.
+                    Only the current owner can initiate a transfer.
+                  </p>
+                </div>
               </div>
             </section>
 
@@ -443,7 +487,7 @@ export default function DocsPage() {
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
                   <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>.</strong>{" "}
-                  The SDK ships with built-in defaults (registry addresses + subgraph URLs) for 3 chains.
+                  The SDK ships with built-in defaults (registry addresses + subgraph URLs) for 5 chains.
                 </p>
               </div>
 
@@ -475,6 +519,16 @@ export default function DocsPage() {
                       <td>Ethereum Sepolia</td>
                       <td>11155111</td>
                       <td><code className="text-xs break-all">gateway.thegraph.com/api/.../6wQRC7geo9XYAhckfmfo8kbMRLeWU8KQd3XsJqFKmZLT</code></td>
+                    </tr>
+                    <tr>
+                      <td>Base Mainnet</td>
+                      <td>8453</td>
+                      <td><code className="text-xs break-all">Built-in (agent0 SDK default)</code></td>
+                    </tr>
+                    <tr>
+                      <td>Base Sepolia</td>
+                      <td>84532</td>
+                      <td><code className="text-xs break-all">Built-in (agent0 SDK default)</code></td>
                     </tr>
                   </tbody>
                 </table>
@@ -661,7 +715,7 @@ export default function DocsPage() {
                 <li><strong className="text-vw-purple">Runtime:</strong> Node.js &ge; 22.0.0</li>
                 <li><strong className="text-vw-purple">Language:</strong> TypeScript (ESM-only)</li>
                 <li><strong className="text-vw-purple">Execution:</strong> npx tsx (no build step at runtime)</li>
-                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk ^1.5.2, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
+                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk ^1.5.3, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
               </ul>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Data Flow</h3>
@@ -675,7 +729,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">I/O Contract</h3>
               <p className="text-sm text-foreground/70 mb-3">
-                All 13 scripts follow the same I/O protocol:
+                All 14 scripts follow the same I/O protocol:
               </p>
               <div className="overflow-x-auto mb-6">
                 <table>
@@ -696,9 +750,9 @@ export default function DocsPage() {
                 <li>ESM-only TypeScript project</li>
                 <li>No build step at runtime (tsx compiles on-the-fly)</li>
                 <li>Stateless scripts (each invocation is standalone)</li>
-                <li>13 TypeScript scripts + 2 shared library files</li>
+                <li>14 TypeScript scripts + 3 shared library files</li>
                 <li>State lives in <code>~/.8004skill/config.json</code> and environment variables</li>
-                <li>npm-distributed via <code>npx 8004skill install</code></li>
+                <li>Distributed via <code>npx skills add</code> (Skills CLI) or <code>npx 8004skill install</code></li>
                 <li>CLI entry point (<code>bin/cli.mjs</code>) is vanilla ESM JS &mdash; runs via npx without tsx</li>
               </ul>
 

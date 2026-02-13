@@ -41,14 +41,14 @@ export default function Features() {
       desc: "Prove or verify agent identity using cryptographic signatures",
     },
     {
-      emoji: "✏️",
-      title: "Update Agent",
-      desc: "Modify agent metadata, endpoints, OASF skills, status, and trust models",
+      emoji: "👤",
+      title: "Whoami",
+      desc: "Resolve your agent from config or wallet and show identity, status, trust, and endpoints",
     },
     {
-      emoji: "💬",
-      title: "Respond to Feedback",
-      desc: "Agent owners can reply to on-chain feedback with text responses",
+      emoji: "🔄",
+      title: "Transfer Agent",
+      desc: "Transfer agent ownership to a new address. Irreversible.",
     },
   ];
 

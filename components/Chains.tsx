@@ -2,7 +2,9 @@ export default function Chains() {
   const sdkFull = [
     { name: "Ethereum Mainnet", id: 1 },
     { name: "Polygon Mainnet", id: 137 },
+    { name: "Base Mainnet", id: 8453 },
     { name: "Ethereum Sepolia", id: 11155111 },
+    { name: "Base Sepolia", id: 84532 },
   ];
 
 
@@ -12,7 +14,7 @@ export default function Chains() {
         Supported Chains
       </h2>
       <p className="text-center text-foreground/60 mb-12 text-sm">
-        Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>. Three chains with built-in defaults.
+        Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>. Five chains with built-in defaults.
       </p>
 
       <div className="space-y-8">
@@ -22,7 +24,7 @@ export default function Chains() {
             <span className="w-2 h-2 rounded-full bg-vw-green animate-pulse" />
             Full SDK Support (Ready to Use)
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {sdkFull.map((chain) => (
               <div
                 key={chain.id}

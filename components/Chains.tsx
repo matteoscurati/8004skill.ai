@@ -9,7 +9,7 @@ export default function Chains() {
 
 
   return (
-    <section id="chains" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section id="chains" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-purple" style={{ textShadow: "0 0 10px #B967FF" }}>
         Supported Chains
       </h2>
@@ -24,7 +24,7 @@ export default function Chains() {
             <span className="w-2 h-2 rounded-full bg-vw-green animate-pulse" />
             Full SDK Support (Ready to Use)
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {sdkFull.map((chain) => (
               <div
                 key={chain.id}

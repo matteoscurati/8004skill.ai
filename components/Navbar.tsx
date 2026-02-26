@@ -49,7 +49,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-foreground/80"
+          className="md:hidden text-foreground/80 p-2"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >

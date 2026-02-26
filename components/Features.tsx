@@ -53,7 +53,7 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section id="features" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-pink" style={{ textShadow: "0 0 10px #FF71CE" }}>
         10 Core Operations
       </h2>

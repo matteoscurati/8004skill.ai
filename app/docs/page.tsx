@@ -33,7 +33,7 @@ export default function DocsPage() {
   return (
     <div className="relative bg-[#0D0221] min-h-screen">
       <div className="pt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-10 py-10">
+        <div className="flex flex-wrap lg:flex-nowrap gap-10 py-10">
           <DocsSidebar />
 
           <article className="docs-content min-w-0 flex-1">
@@ -196,7 +196,7 @@ export default function DocsPage() {
               />
 
               <div className="overflow-x-auto mt-4">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr>
                       <th>Field</th>
@@ -207,7 +207,7 @@ export default function DocsPage() {
                     <tr><td><code>ipfs</code></td><td>IPFS provider (<code>pinata</code>, <code>filecoinPin</code>, <code>node</code>, or <code>null</code>). Credential prompted inline if not in env</td></tr>
                     <tr><td><code>wcProjectId</code></td><td>WalletConnect project ID (a default is provided)</td></tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
             </section>
 
@@ -377,7 +377,7 @@ export default function DocsPage() {
 
                 <h4 className="text-sm font-bold text-vw-green mb-2 mt-4">Trust Labels</h4>
                 <div className="overflow-x-auto">
-                  <table>
+                  <div className="table-wrapper"><table>
                     <thead>
                       <tr>
                         <th>Label</th>
@@ -394,7 +394,7 @@ export default function DocsPage() {
                       <tr><td>Caution</td><td>avg &lt; 0</td><td>Orange</td></tr>
                       <tr><td>Untrusted</td><td>count &ge; 5, avg &lt; -50</td><td>Red</td></tr>
                     </tbody>
-                  </table>
+                  </table></div>
                 </div>
               </div>
 
@@ -496,7 +496,7 @@ export default function DocsPage() {
                 These chains work out of the box &mdash; built-in registry addresses and subgraph URLs, no overrides needed.
               </p>
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr>
                       <th>Chain</th>
@@ -531,7 +531,7 @@ export default function DocsPage() {
                       <td><code className="text-xs break-all">Built-in (agent0 SDK default)</code></td>
                     </tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
             </section>
@@ -543,7 +543,7 @@ export default function DocsPage() {
               </h2>
 
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr>
                       <th>Variable</th>
@@ -578,7 +578,7 @@ export default function DocsPage() {
                       <td>Set to 1 for verbose logging</td>
                     </tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
               <div className="gradient-border p-4 mb-4">
@@ -625,7 +625,7 @@ export default function DocsPage() {
               </p>
 
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr>
                       <th>State</th>
@@ -654,7 +654,7 @@ export default function DocsPage() {
                       <td>User reviews each TX on device</td>
                     </tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Protections</h3>
@@ -670,7 +670,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Threat Surface</h3>
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr><th>Layer</th><th>Threat</th><th>Mitigation</th></tr>
                   </thead>
@@ -682,7 +682,7 @@ export default function DocsPage() {
                     <tr><td>RPC endpoint</td><td>Man-in-the-middle</td><td>HTTPS endpoints enforced</td></tr>
                     <tr><td>EIP-712 wallet set</td><td>Replay / expired signature</td><td>300-second deadline</td></tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Secret Handling Rules</h3>
@@ -717,7 +717,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">How It Works</h3>
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr><th>Concern</th><th>Tool</th><th>Wallet Model</th></tr>
                   </thead>
@@ -725,7 +725,7 @@ export default function DocsPage() {
                     <tr><td>Identity, registration, metadata, signing</td><td><strong>8004skill</strong></td><td>WalletConnect v2 (non-custodial)</td></tr>
                     <tr><td>Payments, discovery, monetization</td><td><strong>awal</strong></td><td>Coinbase custodial wallet</td></tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Enabling X402</h3>
@@ -758,7 +758,7 @@ export default function DocsPage() {
                 </p>
               </div>
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr><th>Command</th><th>Purpose</th></tr>
                   </thead>
@@ -768,7 +768,7 @@ export default function DocsPage() {
                     <tr><td><code>npx awal x402 bazaar search &quot;&lt;query&gt;&quot;</code></td><td>Discover monetized agents</td></tr>
                     <tr><td><code>npm install express x402-express</code></td><td>Add x402 paywall to your own endpoint</td></tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Workflow</h3>
@@ -811,7 +811,7 @@ export default function DocsPage() {
                 All 15 scripts follow the same I/O protocol:
               </p>
               <div className="overflow-x-auto mb-6">
-                <table>
+                <div className="table-wrapper"><table>
                   <thead>
                     <tr><th>Channel</th><th>Format</th><th>Content</th></tr>
                   </thead>
@@ -821,7 +821,7 @@ export default function DocsPage() {
                     <tr><td>exit 0</td><td>&mdash;</td><td>Success</td></tr>
                     <tr><td>exit 1</td><td>&mdash;</td><td>Failure (error on stderr)</td></tr>
                   </tbody>
-                </table>
+                </table></div>
               </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Key Properties</h3>

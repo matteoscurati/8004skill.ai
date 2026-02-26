@@ -33,7 +33,7 @@ export default function QuickStart() {
             {copied ? "Copied!" : "Copy install"}
           </button>
         </div>
-        <pre className="p-5 text-sm leading-relaxed overflow-x-auto">
+        <pre className="p-5 text-xs sm:text-sm leading-relaxed overflow-x-auto">
           <code>
             <span className="text-foreground/40"># Step 1: Install the skill</span>
             {"\n"}

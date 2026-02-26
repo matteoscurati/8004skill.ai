@@ -61,7 +61,7 @@ export default function VaporwaveScene() {
           horizonRef.current.style.transform = `translateY(${-t * 10}%)`;
         }
         if (gridRef.current) {
-          gridRef.current.style.transform = `perspective(500px) rotateX(65deg) translateY(${t * 3}%)`;
+          gridRef.current.style.transform = `perspective(350px) rotateX(70deg) translateY(${t * 3}%)`;
         }
 
         ticking = false;
@@ -133,7 +133,7 @@ export default function VaporwaveScene() {
         style={{
           position: "absolute",
           left: "50%",
-          top: "55%",
+          top: "56%",
           width: "180px",
           height: "180px",
           borderRadius: "50%",
@@ -160,21 +160,40 @@ export default function VaporwaveScene() {
         </div>
       </div>
 
-      {/* Horizon glow line at 78% */}
+      {/* Floor base - purple gradient like classic synthwave */}
       <div
-        ref={horizonRef}
         style={{
           position: "absolute",
           left: 0,
           right: 0,
-          bottom: "0",
-          height: "2px",
-          background: "linear-gradient(90deg, transparent 5%, #FF71CE 25%, #FFCE45 50%, #FF71CE 75%, transparent 95%)",
-          boxShadow: "0 0 30px rgba(255,113,206,0.5), 0 0 60px rgba(255,206,69,0.15)",
+          bottom: 0,
+          height: "20%",
+          background: "linear-gradient(180deg, #1A0540 0%, #2D1260 40%, #3B1A6E 100%)",
         }}
       />
 
-      {/* Mountains - bottom aligned with horizon at 78% */}
+      {/* Grid floor - near edge flush at viewport bottom, far edge reaches horizon */}
+      <div
+        ref={gridRef}
+        style={{
+          position: "absolute",
+          left: "-50%",
+          right: "-50%",
+          bottom: 0,
+          height: "40%",
+          background: `
+            linear-gradient(90deg, rgba(255, 113, 206, 0.35) 0.5px, transparent 0.5px),
+            linear-gradient(0deg, rgba(255, 113, 206, 0.35) 0.5px, transparent 0.5px)
+          `,
+          backgroundSize: "35px 35px",
+          transform: "perspective(350px) rotateX(70deg)",
+          transformOrigin: "center top",
+          animation: "grid-scroll 4s linear infinite",
+          maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, transparent 100%)",
+        }}
+      />
+
+      {/* Mountains - lifted above floor to create grid floor area */}
       <svg
         ref={mountainsRef}
         style={{
@@ -182,8 +201,8 @@ export default function VaporwaveScene() {
           left: 0,
           right: 0,
           width: "100%",
-          bottom: 0,
-          height: "45%",
+          bottom: "20%",
+          height: "42%",
         }}
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
@@ -204,37 +223,17 @@ export default function VaporwaveScene() {
         />
       </svg>
 
-      {/* Sunset glow - rendered IN FRONT of mountains */}
+      {/* Horizon line - at mountain base / grid boundary */}
       <div
+        ref={horizonRef}
         style={{
           position: "absolute",
-          left: "50%",
-          top: "58%",
-          width: "500px",
-          height: "250px",
-          transform: "translateX(-50%)",
-          background: "radial-gradient(ellipse at 50% 80%, rgba(255,206,69,0.35) 0%, rgba(255,159,67,0.2) 25%, rgba(255,113,206,0.1) 50%, transparent 75%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Grid floor - perspective grid below horizon */}
-      <div
-        ref={gridRef}
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: "-40%",
-          right: "-40%",
-          height: "40%",
-          background: `
-            linear-gradient(90deg, rgba(255, 113, 206, 0.35) 1px, transparent 1px),
-            linear-gradient(0deg, rgba(255, 113, 206, 0.35) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-          transform: "perspective(500px) rotateX(65deg)",
-          transformOrigin: "center top",
-          animation: "grid-scroll 12s linear infinite",
+          left: 0,
+          right: 0,
+          bottom: "20%",
+          height: "2px",
+          background: "linear-gradient(90deg, transparent 5%, #FF71CE 25%, #FFCE45 50%, #FF71CE 75%, transparent 95%)",
+          boxShadow: "0 0 20px rgba(255,113,206,0.4)",
         }}
       />
 

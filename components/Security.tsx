@@ -23,7 +23,7 @@ export default function Security() {
   ];
 
   return (
-    <section id="security" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section id="security" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-green" style={{ textShadow: "0 0 10px #05FFA1" }}>
         Secure by Design
       </h2>

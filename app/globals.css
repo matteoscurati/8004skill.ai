@@ -197,7 +197,7 @@ body {
 
 @keyframes grid-scroll {
   0% { background-position: 0 0, 0 0; }
-  100% { background-position: 0 0, 0 80px; }
+  100% { background-position: 0 0, 0 35px; }
 }
 
 /* ===== RETRO GRID (hero specific, kept for backwards compat) ===== */
@@ -463,11 +463,27 @@ html {
 }
 
 /* Table styles for docs */
+.docs-content .table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+}
+
 .docs-content table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
   font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .docs-content table {
+    font-size: 12px;
+  }
+
+  .docs-content th,
+  .docs-content td {
+    white-space: nowrap;
+  }
 }
 
 .docs-content th {

@@ -25,7 +25,7 @@ export default function Hero() {
           8004skill
         </h1>
 
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
           <p
             className="text-lg sm:text-xl md:text-2xl font-heading font-medium neon-flicker"
             style={{
@@ -50,9 +50,9 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={handleCopy}
-            className="group flex items-center gap-3 px-6 py-3 rounded-lg bg-vw-deep/80 border border-vw-pink/40 hover:border-vw-pink transition-all hover:shadow-[0_0_20px_rgba(255,113,206,0.3)]"
+            className="group flex items-center gap-3 px-4 sm:px-6 py-3 rounded-lg bg-vw-deep/80 border border-vw-pink/40 hover:border-vw-pink transition-all hover:shadow-[0_0_20px_rgba(255,113,206,0.3)]"
           >
-            <code className="text-sm text-vw-green">
+            <code className="text-xs sm:text-sm text-vw-green break-all sm:break-normal">
               <span className="text-vw-purple">$</span> npx skills add matteoscurati/8004skill -g
             </code>
             <span className="text-xs text-vw-purple group-hover:text-vw-pink transition-colors">
@@ -62,7 +62,7 @@ export default function Hero() {
 
           <a
             href="/docs"
-            className="px-6 py-3 rounded-lg border border-vw-cyan/40 text-vw-cyan hover:bg-vw-cyan/10 transition-all text-sm hover:shadow-[0_0_20px_rgba(1,205,254,0.2)]"
+            className="px-4 sm:px-6 py-3 rounded-lg border border-vw-cyan/40 text-vw-cyan hover:bg-vw-cyan/10 transition-all text-sm hover:shadow-[0_0_20px_rgba(1,205,254,0.2)]"
           >
             Read the Docs &rarr;
           </a>
@@ -74,8 +74,8 @@ export default function Hero() {
       <div
         className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
         style={{
-          height: "40%",
-          background: "linear-gradient(to bottom, transparent 0%, rgba(13,2,33,0.4) 30%, rgba(13,2,33,0.8) 60%, #0D0221 100%)",
+          height: "30%",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(13,2,33,0.3) 50%, rgba(13,2,33,0.7) 100%)",
         }}
       />
     </section>

@@ -161,7 +161,8 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Chain Selection</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                The agent0 SDK ships with full built-in defaults for <strong>Ethereum Mainnet</strong> (1), <strong>Polygon Mainnet</strong> (137), and <strong>Ethereum Sepolia</strong> (11155111).
+                The agent0 SDK ships with full built-in defaults for 5 chains including <strong>Ethereum Mainnet</strong> (1), <strong>Polygon Mainnet</strong> (137), and <strong>Ethereum Sepolia</strong> (11155111).
+                13 additional mainnet chains are deployed and available with manual configuration.
                 The recommended testnet for development is <strong>Ethereum Sepolia</strong>.
               </p>
 
@@ -270,13 +271,13 @@ export default function DocsPage() {
                 <div className="gradient-border p-4 mb-3">
                   <div className="text-xs space-y-2">
                     <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;search agents&quot;, &quot;find agents&quot;, &quot;agents that do X&quot;</span></div>
-                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">None for semantic search; RPC required for subgraph search</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">Chain ID + RPC URL</span></div>
                   </div>
                 </div>
                 <p className="text-sm text-foreground/70 mb-3">
-                  Two search modes: <strong>semantic search</strong> using natural language queries, and <strong>structured search</strong> with
-                  filters for name, endpoints, OASF skills, capabilities, reputation, and more. Multi-chain support
-                  with sorting and ranking.
+                  Unified search via <code>sdk.searchAgents()</code>. Use <strong>--keyword</strong> for semantic (natural language) search,
+                  structured filters for name, endpoints, OASF skills, capabilities, reputation, and more &mdash; or combine both.
+                  Output is always <code>AgentSummary[]</code>. Multi-chain support with sorting and ranking.
                 </p>
                 <h4 className="text-sm font-bold text-vw-green mb-2">Advanced Filters (50+)</h4>
                 <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
@@ -386,13 +387,13 @@ export default function DocsPage() {
                       </tr>
                     </thead>
                     <tbody>
+                      <tr><td>Untrusted</td><td>count &ge; 5, avg &lt; -50</td><td>Red</td></tr>
+                      <tr><td>Caution</td><td>avg &lt; 0</td><td>Orange</td></tr>
                       <tr><td>Highly Trusted</td><td>count &ge; 20, avg &ge; 80</td><td>Star</td></tr>
                       <tr><td>Trusted</td><td>count &ge; 10, avg &ge; 70</td><td>Green</td></tr>
                       <tr><td>Established</td><td>count &ge; 5, avg &ge; 50</td><td>Green</td></tr>
                       <tr><td>Emerging</td><td>count &gt; 0, count &lt; 5</td><td>Blue</td></tr>
                       <tr><td>No Data</td><td>count = 0</td><td>White</td></tr>
-                      <tr><td>Caution</td><td>avg &lt; 0</td><td>Orange</td></tr>
-                      <tr><td>Untrusted</td><td>count &ge; 5, avg &lt; -50</td><td>Red</td></tr>
                     </tbody>
                   </table></div>
                 </div>
@@ -486,8 +487,8 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>.</strong>{" "}
-                  The SDK ships with built-in defaults (registry addresses + subgraph URLs) for 5 chains.
+                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.5.3.</strong>{" "}
+                  5 chains with built-in defaults, 13+ additional mainnet chains deployed with manual config.
                 </p>
               </div>
 
@@ -534,6 +535,45 @@ export default function DocsPage() {
                 </table></div>
               </div>
 
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Deployed Chains (Manual Config)</h3>
+              <p className="text-sm text-foreground/70 mb-3">
+                These chains have ERC-8004 contracts deployed at deterministic CREATE2 addresses but are not yet indexed by the SDK subgraph.
+                To use them, set the <code>SUBGRAPH_URL</code> environment variable pointing to a subgraph instance for that chain.
+              </p>
+              <div className="overflow-x-auto mb-6">
+                <div className="table-wrapper"><table>
+                  <thead>
+                    <tr>
+                      <th>Chain</th>
+                      <th>Chain ID</th>
+                      <th>Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Arbitrum One</td><td>42161</td><td>Mainnet</td></tr>
+                    <tr><td>Optimism</td><td>10</td><td>Mainnet</td></tr>
+                    <tr><td>Avalanche C-Chain</td><td>43114</td><td>Mainnet</td></tr>
+                    <tr><td>BSC (BNB Chain)</td><td>56</td><td>Mainnet</td></tr>
+                    <tr><td>Gnosis</td><td>100</td><td>Mainnet</td></tr>
+                    <tr><td>Scroll</td><td>534352</td><td>Mainnet</td></tr>
+                    <tr><td>Celo</td><td>42220</td><td>Mainnet</td></tr>
+                    <tr><td>Taiko</td><td>167000</td><td>Mainnet</td></tr>
+                    <tr><td>Linea</td><td>59144</td><td>Mainnet</td></tr>
+                    <tr><td>Mantle</td><td>5000</td><td>Mainnet</td></tr>
+                    <tr><td>Monad</td><td>10143</td><td>Mainnet</td></tr>
+                    <tr><td>MegaETH</td><td>40</td><td>Mainnet</td></tr>
+                    <tr><td>Abstract</td><td>2741</td><td>Mainnet</td></tr>
+                  </tbody>
+                </table></div>
+              </div>
+              <div className="gradient-border p-4 mb-6">
+                <p className="text-xs text-foreground/60">
+                  <strong className="text-vw-purple">Testnets available too.</strong>{" "}
+                  Most deployed chains also have testnet deployments (Arbitrum Sepolia, Optimism Sepolia, Avalanche Fuji, etc.).
+                  All use the same deterministic contract addresses. See the skill reference for full details.
+                </p>
+              </div>
+
             </section>
 
             {/* Environment Variables */}
@@ -576,6 +616,21 @@ export default function DocsPage() {
                       <td><code>DEBUG</code></td>
                       <td>Debugging (optional)</td>
                       <td>Set to 1 for verbose logging</td>
+                    </tr>
+                    <tr>
+                      <td><code>SUBGRAPH_URL</code></td>
+                      <td>Non-default chains</td>
+                      <td>Subgraph URL override for deployed chains</td>
+                    </tr>
+                    <tr>
+                      <td><code>REGISTRY_ADDRESS_IDENTITY</code></td>
+                      <td>Non-default chains</td>
+                      <td>Identity registry address override</td>
+                    </tr>
+                    <tr>
+                      <td><code>REGISTRY_ADDRESS_REPUTATION</code></td>
+                      <td>Non-default chains</td>
+                      <td>Reputation registry address override</td>
                     </tr>
                   </tbody>
                 </table></div>
@@ -789,6 +844,12 @@ export default function DocsPage() {
                 Architecture
               </h2>
 
+              <div className="gradient-border p-4 mb-6">
+                <p className="text-xs text-foreground/60">
+                  <strong className="text-vw-purple">As of agent0-sdk v1.5.3, March 2026.</strong>
+                </p>
+              </div>
+
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Tech Stack</h3>
               <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1 mb-6">
                 <li><strong className="text-vw-purple">Runtime:</strong> Node.js &ge; 22.0.0</li>
@@ -837,18 +898,105 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">ERC-8004 Protocol</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
+                ERC-8004 defines a standard for registering, discovering, and evaluating AI agents on EVM chains.
                 Three lightweight registries accessed via <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>:
               </p>
-              <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-1 mb-4">
-                <li><strong className="text-vw-purple">Identity Registry (ERC-721):</strong> Agent IDs as NFTs with IPFS/HTTP metadata</li>
-                <li><strong className="text-vw-purple">Reputation Registry:</strong> On-chain feedback signals with off-chain enrichment</li>
-                <li><strong className="text-vw-purple">Validation Registry:</strong> Third-party validator attestations</li>
+              <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-2 mb-4">
+                <li><strong className="text-vw-purple">Identity Registry (ERC-721):</strong> Agent IDs as NFTs. Each token references a registration file (IPFS/HTTP) with name, description, endpoints, and capabilities. Supports MCP, A2A, ENS, OASF endpoint types.</li>
+                <li><strong className="text-vw-purple">Reputation Registry:</strong> On-chain feedback with ratings (-100 to 100), tags, and optional IPFS-stored text. Feedback is immutable once submitted (can only be revoked, not edited). Agent owners can append responses.</li>
+                <li><strong className="text-vw-purple">Validation Registry:</strong> Third-party validator attestations for trust models (reputation, crypto-economic, TEE attestation).</li>
               </ol>
-              <p className="text-sm text-foreground/70">
+              <p className="text-sm text-foreground/70 mb-3">
+                All contracts use deterministic CREATE2 deployment &mdash; same addresses on every chain. Currently deployed on 18+ chains.
+              </p>
+              <p className="text-sm text-foreground/70 mb-3">
                 <strong>Global Agent ID Format:</strong> <code>eip155:&#123;chainId&#125;:&#123;identityRegistryAddress&#125;:&#123;tokenId&#125;</code>
                 <br />
                 <strong>Short Form:</strong> <code>&#123;chainId&#125;:&#123;tokenId&#125;</code>
               </p>
+              <p className="text-sm text-foreground/70">
+                <strong>Agent Lifecycle:</strong> Register &rarr; Configure endpoints &rarr; Discover via search &rarr; Interact via MCP/A2A &rarr; Rate via feedback &rarr; Update as needed &rarr; Transfer ownership (irreversible).
+              </p>
+            </section>
+
+            {/* Troubleshooting */}
+            <section id="troubleshooting" className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
+                Troubleshooting
+              </h2>
+
+              <p className="text-sm text-foreground/70 mb-6 leading-relaxed">
+                Common issues and their solutions. Run <code>npx 8004skill doctor</code> for automated diagnostics.
+              </p>
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">WalletConnect Issues</h3>
+                  <div className="overflow-x-auto">
+                    <div className="table-wrapper"><table>
+                      <thead>
+                        <tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>&quot;No connected account&quot;</td><td>Session expired or missing</td><td>Run <code>wc-pair.ts</code> to re-pair</td></tr>
+                        <tr><td>&quot;User rejected&quot;</td><td>Transaction declined in wallet</td><td>Re-run operation, approve in wallet</td></tr>
+                        <tr><td>&quot;Project not found&quot;</td><td>Invalid WC project ID</td><td>Verify at cloud.walletconnect.com</td></tr>
+                        <tr><td>Session corruption</td><td>Corrupted storage file</td><td>Delete <code>~/.8004skill/wc-storage.json</code>, re-pair</td></tr>
+                      </tbody>
+                    </table></div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Transaction Errors</h3>
+                  <div className="overflow-x-auto">
+                    <div className="table-wrapper"><table>
+                      <thead>
+                        <tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>&quot;insufficient funds&quot;</td><td>Not enough gas token</td><td>Fund wallet (use faucets for testnets)</td></tr>
+                        <tr><td>Timeout (120s)</td><td>Slow mining / congestion</td><td>Check txHash on explorer; may still confirm</td></tr>
+                        <tr><td>&quot;execution reverted&quot;</td><td>Contract rejected tx</td><td>Check ownership, agent ID, parameter validity</td></tr>
+                      </tbody>
+                    </table></div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">IPFS &amp; Search</h3>
+                  <div className="overflow-x-auto">
+                    <div className="table-wrapper"><table>
+                      <thead>
+                        <tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>IPFS upload failed</td><td>Invalid/expired credentials</td><td>Verify PINATA_JWT or equivalent</td></tr>
+                        <tr><td>Stale data after write</td><td>Subgraph indexing delay</td><td>Wait 30&ndash;60s and retry the read</td></tr>
+                        <tr><td>Semantic search unavailable</td><td>API unreachable</td><td>SDK handles fallback internally; retry or use structured filters only</td></tr>
+                        <tr><td>No search results</td><td>Query too specific</td><td>Broaden query or use <code>--chains all</code></td></tr>
+                      </tbody>
+                    </table></div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Environment &amp; Setup</h3>
+                  <div className="overflow-x-auto">
+                    <div className="table-wrapper"><table>
+                      <thead>
+                        <tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Node.js version error</td><td>Requires &ge; 22.0.0</td><td><code>brew install node</code> or download from nodejs.org</td></tr>
+                        <tr><td>ERR_REQUIRE_ESM</td><td>Wrong module system</td><td>Use <code>npx tsx</code>, ensure Node &ge; 22</td></tr>
+                        <tr><td>Cannot find module</td><td>Missing dependencies</td><td><code>npm install</code> in skill directory</td></tr>
+                        <tr><td>Config permissions</td><td>Wrong file permissions</td><td><code>chmod 600 ~/.8004skill/config.json</code></td></tr>
+                      </tbody>
+                    </table></div>
+                  </div>
+                </div>
+              </div>
             </section>
 
             {/* CLI Management */}

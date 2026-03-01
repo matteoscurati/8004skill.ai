@@ -13,6 +13,7 @@ const sections = [
   { id: "security-model", label: "Security Model" },
   { id: "x402-integration", label: "X402 Payments" },
   { id: "architecture", label: "Architecture" },
+  { id: "troubleshooting", label: "Troubleshooting" },
   { id: "cli-management", label: "CLI Management" },
 ];
 

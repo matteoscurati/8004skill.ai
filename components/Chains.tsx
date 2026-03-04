@@ -24,7 +24,7 @@ export default function Chains() {
   ];
 
   return (
-    <section id="chains" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section id="chains" className="scroll-mt-24 pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-purple" style={{ textShadow: "0 0 10px #B967FF" }}>
         Supported Chains
       </h2>
@@ -61,11 +61,11 @@ export default function Chains() {
           <p className="text-xs text-foreground/50 mb-4">
             Contracts deployed with same CREATE2 addresses. Requires <code className="text-vw-purple/80">SUBGRAPH_URL</code> env var.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             {deployed.map((chain) => (
               <div
                 key={chain.id}
-                className="gradient-border p-4 text-center hover:translate-y-[-2px] transition-transform opacity-80"
+                className="gradient-border p-4 text-center hover:translate-y-[-2px] transition-transform opacity-80 w-[calc(50%-6px)] sm:w-[calc(33.333%-8px)] lg:w-[calc(20%-10px)]"
               >
                 <div className="font-heading font-bold text-sm text-foreground/70">{chain.name}</div>
                 <div className="text-xs text-vw-cyan/50 mt-1">Chain ID: {chain.id}</div>

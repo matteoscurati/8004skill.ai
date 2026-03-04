@@ -138,33 +138,6 @@ body {
   transition: transform 0.05s linear;
 }
 
-/* Road / grid floor */
-.vw-grid-floor {
-  position: absolute;
-  bottom: 0;
-  left: -50%;
-  right: -50%;
-  height: 50%;
-  background:
-    linear-gradient(90deg, rgba(255, 113, 206, 0.15) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255, 113, 206, 0.15) 1px, transparent 1px);
-  background-size: 80px 80px;
-  transform: perspective(500px) rotateX(65deg);
-  transform-origin: center top;
-  animation: grid-scroll 12s linear infinite;
-  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, transparent 100%);
-}
-
-/* Horizon glow line */
-.vw-horizon {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 5%, #FF71CE 30%, #FFCE45 50%, #FF71CE 70%, transparent 95%);
-  box-shadow: 0 0 30px rgba(255, 113, 206, 0.5), 0 0 60px rgba(255, 113, 206, 0.2);
-}
-
 /* Scanline overlay on the whole scene */
 .vw-scanlines {
   position: absolute;
@@ -179,48 +152,6 @@ body {
   z-index: 10;
 }
 
-/* VHS scan line */
-.vw-vhs-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, rgba(255, 113, 206, 0.35), rgba(1, 205, 254, 0.35), transparent);
-  animation: scan-line 6s linear infinite;
-  z-index: 11;
-}
-
-@keyframes scan-line {
-  0% { top: -2%; }
-  100% { top: 102%; }
-}
-
-@keyframes grid-scroll {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 0 0, 0 35px; }
-}
-
-/* ===== RETRO GRID (hero specific, kept for backwards compat) ===== */
-.retro-grid {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background:
-    linear-gradient(transparent 65%, rgba(255, 113, 206, 0.15) 65%),
-    linear-gradient(90deg, rgba(255, 113, 206, 0.1) 1px, transparent 1px),
-    linear-gradient(rgba(255, 113, 206, 0.1) 1px, transparent 1px);
-  background-size: 100% 100%, 60px 60px, 60px 60px;
-  transform: perspective(400px) rotateX(60deg);
-  transform-origin: bottom center;
-  animation: grid-scroll-hero 15s linear infinite;
-}
-
-@keyframes grid-scroll-hero {
-  0% { background-position: 0 0, 0 0, 0 0; }
-  100% { background-position: 0 0, 0 60px, 0 60px; }
-}
 
 /* ===== ANIMATIONS ===== */
 

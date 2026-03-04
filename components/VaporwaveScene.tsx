@@ -31,8 +31,6 @@ export default function VaporwaveScene() {
   const starsRef = useRef<HTMLDivElement>(null);
   const sunRef = useRef<HTMLDivElement>(null);
   const mountainsRef = useRef<SVGSVGElement>(null);
-  const horizonRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -53,17 +51,12 @@ export default function VaporwaveScene() {
         }
         if (sunRef.current) {
           sunRef.current.style.transform = `translateX(-50%) translateY(${-t * 15}px)`;
+          sunRef.current.style.opacity = `${Math.max(0, 1 - t * 2)}`;
         }
         if (mountainsRef.current) {
           mountainsRef.current.style.transform = `translateY(${-t * 8}%)`;
+          mountainsRef.current.style.opacity = `${Math.max(0, 1 - t * 2)}`;
         }
-        if (horizonRef.current) {
-          horizonRef.current.style.transform = `translateY(${-t * 10}%)`;
-        }
-        if (gridRef.current) {
-          gridRef.current.style.transform = `perspective(350px) rotateX(70deg) translateY(${t * 3}%)`;
-        }
-
         ticking = false;
       });
     };
@@ -133,9 +126,9 @@ export default function VaporwaveScene() {
         style={{
           position: "absolute",
           left: "50%",
-          top: "56%",
-          width: "180px",
-          height: "180px",
+          top: "60%",
+          width: "160px",
+          height: "160px",
           borderRadius: "50%",
           background: "linear-gradient(180deg, #FFCE45 0%, #FFA040 25%, #FF71CE 60%, #B967FF 100%)",
           boxShadow: "0 0 60px rgba(255,159,67,0.5), 0 0 120px rgba(255,113,206,0.25)",
@@ -160,40 +153,7 @@ export default function VaporwaveScene() {
         </div>
       </div>
 
-      {/* Floor base - purple gradient like classic synthwave */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: "20%",
-          background: "linear-gradient(180deg, #1A0540 0%, #2D1260 40%, #3B1A6E 100%)",
-        }}
-      />
-
-      {/* Grid floor - near edge flush at viewport bottom, far edge reaches horizon */}
-      <div
-        ref={gridRef}
-        style={{
-          position: "absolute",
-          left: "-50%",
-          right: "-50%",
-          bottom: 0,
-          height: "40%",
-          background: `
-            linear-gradient(90deg, rgba(255, 113, 206, 0.35) 0.5px, transparent 0.5px),
-            linear-gradient(0deg, rgba(255, 113, 206, 0.35) 0.5px, transparent 0.5px)
-          `,
-          backgroundSize: "35px 35px",
-          transform: "perspective(350px) rotateX(70deg)",
-          transformOrigin: "center top",
-          animation: "grid-scroll 4s linear infinite",
-          maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, transparent 100%)",
-        }}
-      />
-
-      {/* Mountains - lifted above floor to create grid floor area */}
+      {/* Mountains */}
       <svg
         ref={mountainsRef}
         style={{
@@ -201,8 +161,8 @@ export default function VaporwaveScene() {
           left: 0,
           right: 0,
           width: "100%",
-          bottom: "20%",
-          height: "42%",
+          bottom: 0,
+          height: "30%",
         }}
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
@@ -223,17 +183,16 @@ export default function VaporwaveScene() {
         />
       </svg>
 
-      {/* Horizon line - at mountain base / grid boundary */}
+      {/* Dark fade at bottom - covers mountains for clean transition */}
       <div
-        ref={horizonRef}
         style={{
           position: "absolute",
           left: 0,
           right: 0,
-          bottom: "20%",
-          height: "2px",
-          background: "linear-gradient(90deg, transparent 5%, #FF71CE 25%, #FFCE45 50%, #FF71CE 75%, transparent 95%)",
-          boxShadow: "0 0 20px rgba(255,113,206,0.4)",
+          bottom: 0,
+          height: "45%",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(13,2,33,0.4) 15%, rgba(13,2,33,0.8) 30%, #0D0221 45%, #0D0221 100%)",
+          pointerEvents: "none",
         }}
       />
 

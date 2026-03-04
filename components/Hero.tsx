@@ -12,7 +12,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-start justify-center overflow-hidden">
+    <section className="relative min-h-[75vh] flex items-start justify-center overflow-hidden">
       {/* Content - positioned in upper portion to avoid overlapping landscape */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-28 sm:pt-32">
         <h1
@@ -25,23 +25,22 @@ export default function Hero() {
           8004skill
         </h1>
 
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <p
-            className="text-lg sm:text-xl md:text-2xl font-heading font-medium neon-flicker"
-            style={{
-              color: "#01CDFE",
-              textShadow: "0 0 10px #01CDFE, 0 0 20px #01CDFE",
-            }}
-          >
-            The AI Agent Skill for the On-Chain Agent Economy
-          </p>
-          <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-vw-green/40 text-vw-green/80 whitespace-nowrap">
-            v2.0.0
-          </span>
-        </div>
+        <p
+          className="text-lg sm:text-xl md:text-2xl font-heading font-medium neon-flicker mb-2"
+          style={{
+            color: "#01CDFE",
+            textShadow: "0 0 10px #01CDFE, 0 0 20px #01CDFE",
+          }}
+        >
+          The AI Agent Skill for the On-Chain Agent Economy
+        </p>
+        <span className="inline-block text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-vw-green/40 text-vw-green/80 mb-4">
+          v2.0.0
+        </span>
 
         <p className="text-sm sm:text-base text-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
           Register, discover, and rate AI agents on Ethereum, Polygon &amp; Sepolia.
+          {" "}
           <br className="hidden sm:block" />
           Conversational. No CLI flags. Just talk.
         </p>
@@ -74,8 +73,8 @@ export default function Hero() {
       <div
         className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
         style={{
-          height: "30%",
-          background: "linear-gradient(to bottom, transparent 0%, rgba(13,2,33,0.3) 50%, rgba(13,2,33,0.7) 100%)",
+          height: "20%",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(13,2,33,0.8) 70%, #0D0221 100%)",
         }}
       />
     </section>

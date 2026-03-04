@@ -53,7 +53,7 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section id="features" className="scroll-mt-24 pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-pink" style={{ textShadow: "0 0 10px #FF71CE" }}>
         10 Core Operations
       </h2>
@@ -61,11 +61,11 @@ export default function Features() {
         Everything you need to manage AI agents on-chain, through natural conversation.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         {features.map((f) => (
           <div
             key={f.title}
-            className="gradient-border p-5 hover:translate-y-[-2px] transition-transform"
+            className="gradient-border p-5 hover:translate-y-[-2px] transition-transform w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)]"
           >
             <div className="text-2xl mb-2">{f.emoji}</div>
             <h3 className="font-heading font-bold text-vw-cyan text-sm mb-1">{f.title}</h3>

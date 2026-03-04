@@ -7,7 +7,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section className="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-cyan" style={{ textShadow: "0 0 10px #01CDFE" }}>
         How It Works
       </h2>

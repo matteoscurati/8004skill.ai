@@ -39,7 +39,7 @@ export default function Hero() {
         </span>
 
         <p className="text-sm sm:text-base text-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Register, discover, and rate AI agents on Ethereum, Polygon &amp; Sepolia.
+          Register, discover, and rate AI agents across EVM chains.
           {" "}
           <br className="hidden sm:block" />
           Conversational. No CLI flags. Just talk.

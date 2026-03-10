@@ -3,7 +3,7 @@ export default function Features() {
     {
       emoji: "⚙️",
       title: "Configure",
-      desc: "Set up chain, RPC, and WalletConnect session. IPFS credentials prompted on demand",
+      desc: "Set up chain, RPC, and WalletConnect session. IPFS uses env-backed credentials when needed.",
     },
     {
       emoji: "📝",
@@ -50,12 +50,27 @@ export default function Features() {
       title: "Transfer Agent",
       desc: "Transfer agent ownership to a new address. Irreversible.",
     },
+    {
+      emoji: "📋",
+      title: "Get Summary",
+      desc: "Fetch the indexed AgentSummary view of any agent from the subgraph",
+    },
+    {
+      emoji: "🔑",
+      title: "Ownership",
+      desc: "Check who owns an agent or verify if a specific address is the owner",
+    },
+    {
+      emoji: "🔧",
+      title: "SDK Diagnostics",
+      desc: "Inspect registry addresses, read-only status, and chain/IPFS/subgraph availability",
+    },
   ];
 
   return (
     <section id="features" className="scroll-mt-24 pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-pink" style={{ textShadow: "0 0 10px #FF71CE" }}>
-        10 Core Operations
+        13 Core Operations
       </h2>
       <p className="text-center text-foreground/60 mb-12 max-w-xl mx-auto text-sm">
         Everything you need to manage AI agents on-chain, through natural conversation.

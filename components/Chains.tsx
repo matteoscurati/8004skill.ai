@@ -12,15 +12,22 @@ export default function Chains() {
     { name: "Optimism", id: 10 },
     { name: "Avalanche", id: 43114 },
     { name: "BSC", id: 56 },
-    { name: "Gnosis", id: 100 },
+    { name: "Monad", id: 143 },
     { name: "Scroll", id: 534352 },
+    { name: "Gnosis", id: 100 },
     { name: "Celo", id: 42220 },
     { name: "Taiko", id: 167000 },
     { name: "Linea", id: 59144 },
-    { name: "Mantle", id: 5000 },
-    { name: "Monad", id: 10143 },
-    { name: "MegaETH", id: 40 },
+    { name: "MegaETH", id: 4326 },
+    { name: "XLayer", id: 196 },
     { name: "Abstract", id: 2741 },
+    { name: "Mantle", id: 5000 },
+    { name: "Soneium", id: 1868 },
+    { name: "GOAT Network", id: 2345 },
+    { name: "Metis", id: 1088 },
+    { name: "Hedera", id: 295 },
+    { name: "SKALE Base", id: 1187947933 },
+    { name: "Shape", id: 360 },
   ];
 
   return (
@@ -29,7 +36,7 @@ export default function Chains() {
         Supported Chains
       </h2>
       <p className="text-center text-foreground/60 mb-12 text-sm">
-        Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>. 18 chains across mainnets and testnets.
+        Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>. Built-in defaults for 5 chains, plus additional deployed mainnets with manual config.
       </p>
 
       <div className="space-y-8">
@@ -56,10 +63,10 @@ export default function Chains() {
         <div>
           <h3 className="text-sm font-bold text-vw-cyan mb-4 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-vw-cyan" />
-            Deployed (Manual Config)
+            Deployed Mainnets (Manual Config)
           </h3>
           <p className="text-xs text-foreground/50 mb-4">
-            Contracts deployed with same CREATE2 addresses. Requires <code className="text-vw-purple/80">SUBGRAPH_URL</code> env var.
+            Contracts deployed with the same CREATE2 addresses. Discovery flows require <code className="text-vw-purple/80">SUBGRAPH_URL</code> on non-default chains.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {deployed.map((chain) => (

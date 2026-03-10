@@ -18,7 +18,7 @@ export default function Security() {
     {
       icon: "🚫",
       title: "Zero Secret Storage",
-      desc: "Config files store only chain/RPC/WC project ID. No secrets, no mnemonics, no passwords are ever stored.",
+      desc: "Config stores chain, RPC, IPFS provider, WalletConnect ID, and registration metadata. No secrets, mnemonics, or passwords are stored.",
     },
   ];
 

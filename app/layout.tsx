@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "8004skill — AI Agent Skill for the On-Chain Agent Economy",
   description:
-    "Register, discover, and rate AI agents on Ethereum, Polygon & Sepolia. The conversational skill for ERC-8004. Powered by agent0 SDK. No CLI flags — just talk.",
+    "Register, discover, and rate AI agents across EVM chains. The conversational skill for ERC-8004. Powered by agent0 SDK. No CLI flags — just talk.",
   keywords: [
     "ERC-8004",
     "AI agent",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "8004skill — AI Agent Skill for the On-Chain Agent Economy",
     description:
-      "Register, discover, and rate AI agents on Ethereum, Polygon & Sepolia. Powered by agent0 SDK. No CLI flags. Just talk.",
+      "Register, discover, and rate AI agents across EVM chains. Powered by agent0 SDK. No CLI flags. Just talk.",
     type: "website",
     url: "https://www.8004skill.ai",
   },
@@ -65,7 +65,7 @@ export default function RootLayout({
                 name: "8004skill",
                 url: "https://www.8004skill.ai",
                 description:
-                  "The AI Agent Skill for the On-Chain Agent Economy. Register, discover, and rate AI agents on Ethereum, Polygon & Sepolia.",
+                  "The AI Agent Skill for the On-Chain Agent Economy. Register, discover, and rate AI agents across EVM chains.",
               },
               {
                 "@context": "https://schema.org",
@@ -90,7 +90,7 @@ export default function RootLayout({
                   priceCurrency: "USD",
                 },
                 description:
-                  "Conversational AI agent skill for ERC-8004 on-chain agent identity and reputation. Register, discover, and rate agents on Ethereum, Polygon & Sepolia.",
+                  "Conversational AI agent skill for ERC-8004 on-chain agent identity and reputation. Register, discover, and rate agents across EVM chains.",
               },
             ]),
           }}

@@ -118,11 +118,11 @@ export default function DocsPage() {
                 After installing, the skill is available via the <code>/8004skill</code> slash command or natural language.
               </p>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Claude Code inherits your shell environment. IPFS credentials are prompted inline when needed,
-                but you can optionally pre-configure them via env vars or <code>~/.8004skill/.env</code>:
+                Claude Code inherits your shell environment. Configure IPFS credentials via env vars or
+                <code>~/.8004skill/.env</code> before running write operations that need them:
               </p>
               <CodeBlock
-                code={`# Optional: pre-configure env vars (prompted inline if not set)\nexport PINATA_JWT=your_pinata_jwt\nclaude\n\n# Or use a .env file (loaded automatically)\ncp .env.example ~/.8004skill/.env\nchmod 600 ~/.8004skill/.env`}
+                code={`# Optional: pre-configure env vars\nexport PINATA_JWT=your_pinata_jwt\nclaude\n\n# Or use a .env file (loaded automatically)\ncp .env.example ~/.8004skill/.env\nchmod 600 ~/.8004skill/.env`}
                 language="bash"
               />
 
@@ -162,19 +162,20 @@ export default function DocsPage() {
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Chain Selection</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
                 The agent0 SDK ships with full built-in defaults for 5 chains including <strong>Ethereum Mainnet</strong> (1), <strong>Polygon Mainnet</strong> (137), and <strong>Ethereum Sepolia</strong> (11155111).
-                13 additional mainnet chains are deployed and available with manual configuration.
+                Additional deployed mainnet and testnet chains are available with manual configuration.
                 The recommended testnet for development is <strong>Ethereum Sepolia</strong>.
               </p>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">IPFS Providers</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Agent metadata is stored on IPFS. Three provider options are supported.
-                Credentials are requested inline during operations that need them &mdash; no pre-configuration required.
+                Agent metadata is stored on IPFS. Four provider options are supported.
+                Configure the matching credential in your environment or <code>~/.8004skill/.env</code> before write operations that need it.
               </p>
               <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1 mb-4">
-                <li><strong className="text-vw-purple">Pinata</strong> &mdash; <code>PINATA_JWT</code> (env var or prompted inline)</li>
-                <li><strong className="text-vw-purple">Filecoin</strong> &mdash; <code>FILECOIN_PRIVATE_KEY</code> (env var or prompted inline)</li>
-                <li><strong className="text-vw-purple">Local Node</strong> &mdash; <code>IPFS_NODE_URL</code> (env var or prompted inline)</li>
+                <li><strong className="text-vw-purple">Pinata</strong> &mdash; <code>PINATA_JWT</code></li>
+                <li><strong className="text-vw-purple">Filecoin</strong> &mdash; <code>FILECOIN_PRIVATE_KEY</code></li>
+                <li><strong className="text-vw-purple">Local Node</strong> &mdash; <code>IPFS_NODE_URL</code></li>
+                <li><strong className="text-vw-purple">Helia</strong> &mdash; Embedded IPFS node (no external credentials needed)</li>
               </ul>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">WalletConnect</h3>
@@ -185,12 +186,16 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Config File Format</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Only two user-facing fields. Chain, RPC, and registrations are managed automatically by the agent.
+                The configure flow manages the full file for you. It stores chain, RPC, IPFS provider, WalletConnect project ID,
+                and any locally tracked registrations, but no secrets.
               </p>
               <CodeBlock
                 code={`{
+  "activeChain": 11155111,
+  "rpcUrl": "https://rpc.sepolia.org",
   "ipfs": "pinata",
-  "wcProjectId": "optional-walletconnect-project-id"
+  "wcProjectId": "optional-walletconnect-project-id",
+  "registrations": {}
 }`}
                 language="json"
                 filename="~/.8004skill/config.json"
@@ -205,8 +210,11 @@ export default function DocsPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td><code>ipfs</code></td><td>IPFS provider (<code>pinata</code>, <code>filecoinPin</code>, <code>node</code>, or <code>null</code>). Credential prompted inline if not in env</td></tr>
+                    <tr><td><code>activeChain</code></td><td>Active chain ID</td></tr>
+                    <tr><td><code>rpcUrl</code></td><td>RPC endpoint for the active chain</td></tr>
+                    <tr><td><code>ipfs</code></td><td>IPFS provider (<code>pinata</code>, <code>filecoinPin</code>, <code>node</code>, <code>helia</code>, or <code>null</code>)</td></tr>
                     <tr><td><code>wcProjectId</code></td><td>WalletConnect project ID (a default is provided)</td></tr>
+                    <tr><td><code>registrations</code></td><td>Locally tracked agents keyed by chain ID</td></tr>
                   </tbody>
                 </table></div>
               </div>
@@ -233,7 +241,7 @@ export default function DocsPage() {
                 <p className="text-sm text-foreground/70">
                   The wizard guides you through: choosing a supported EVM chain, configuring the RPC endpoint,
                   configuring WalletConnect project ID, pairing your wallet via QR code,
-                  and running preflight checks. IPFS credentials are prompted inline when needed.
+                  and running preflight checks. IPFS credentials must be preconfigured in your environment when required.
                 </p>
               </div>
 
@@ -251,7 +259,7 @@ export default function DocsPage() {
                 </div>
                 <p className="text-sm text-foreground/70 mb-3">
                   Collects agent name, description, and image. Adds MCP and/or A2A endpoints.
-                  Assigns OASF skills and domains. Uploads metadata to IPFS. Mints ERC-721 agent identity NFT on-chain.
+                  Assigns OASF skills and domains. Supports three storage modes: <strong>IPFS</strong> (Pinata, Filecoin, local node, or Helia), <strong>HTTP</strong> (external URI), or <strong>on-chain</strong> (ERC-8004 JSON data URI). Mints ERC-721 agent identity NFT on-chain.
                 </p>
                 <h4 className="text-sm font-bold text-vw-green mb-2">Four Golden Rules</h4>
                 <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-1">
@@ -325,7 +333,7 @@ export default function DocsPage() {
                 <p className="text-sm text-foreground/70 mb-3">
                   Rate agents on -100 to 100 scale (decimals supported). Add up to 2 tags from standard set:
                   starred, reachable, uptime, successRate, responseTime, revenues, tradingYield. Include optional
-                  text feedback (stored on IPFS). Target specific endpoints.
+                  text feedback (stored on IPFS). Target specific endpoints. Off-chain feedback supports spec-aligned granularity: target specific MCP tools/prompts/resources, A2A skills/contexts/tasks, or OASF skills/domains.
                 </p>
                 <h4 className="text-sm font-bold text-vw-green mb-2">Sub-operations</h4>
                 <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
@@ -477,6 +485,60 @@ export default function DocsPage() {
                   </p>
                 </div>
               </div>
+
+              {/* Get Agent Summary */}
+              <div className="mb-10">
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Get Agent Summary</h3>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Fetch the indexed AgentSummary view of any agent from the subgraph.
+                </p>
+                <div className="gradient-border p-4 mb-3">
+                  <div className="text-xs space-y-2">
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;get agent&quot;, &quot;agent summary&quot;, &quot;fetch agent info&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">None (read-only)</span></div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70">
+                  Uses <code>sdk.getAgent()</code> to retrieve a lightweight indexed view of an agent from the subgraph.
+                  Returns name, description, owner, endpoints, skills, domains, trust models, and metadata without loading the full registration file.
+                </p>
+              </div>
+
+              {/* Ownership */}
+              <div className="mb-10">
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">Ownership</h3>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Check who owns an agent or verify if a specific address is the owner.
+                </p>
+                <div className="gradient-border p-4 mb-3">
+                  <div className="text-xs space-y-2">
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;who owns agent&quot;, &quot;check ownership&quot;, &quot;is owner&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">None (read-only)</span></div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70">
+                  Two actions: <strong>get-owner</strong> returns the current owner address for an agent ID,
+                  <strong> is-owner</strong> checks whether a given address owns a specific agent. Both are read-only and require no wallet connection.
+                </p>
+              </div>
+
+              {/* SDK Diagnostics */}
+              <div className="mb-10">
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">SDK Diagnostics</h3>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Inspect registry addresses, read-only status, and chain/IPFS/subgraph availability.
+                </p>
+                <div className="gradient-border p-4 mb-3">
+                  <div className="text-xs space-y-2">
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;sdk info&quot;, &quot;chain diagnostics&quot;, &quot;check sdk&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">None (read-only)</span></div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70">
+                  Reports chain configuration, registry contract addresses, read-only vs full-write status,
+                  and availability of IPFS and subgraph clients. Useful for debugging configuration issues.
+                </p>
+              </div>
             </section>
 
             {/* Supported Chains */}
@@ -487,8 +549,8 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.5.3.</strong>{" "}
-                  5 chains with built-in defaults, 13+ additional mainnet chains deployed with manual config.
+                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.6.0.</strong>{" "}
+                  5 chains with built-in defaults, plus additional deployed chains available with manual config.
                 </p>
               </div>
 
@@ -559,18 +621,25 @@ export default function DocsPage() {
                     <tr><td>Celo</td><td>42220</td><td>Mainnet</td></tr>
                     <tr><td>Taiko</td><td>167000</td><td>Mainnet</td></tr>
                     <tr><td>Linea</td><td>59144</td><td>Mainnet</td></tr>
+                    <tr><td>MegaETH</td><td>4326</td><td>Mainnet</td></tr>
+                    <tr><td>XLayer</td><td>196</td><td>Mainnet</td></tr>
                     <tr><td>Mantle</td><td>5000</td><td>Mainnet</td></tr>
-                    <tr><td>Monad</td><td>10143</td><td>Mainnet</td></tr>
-                    <tr><td>MegaETH</td><td>40</td><td>Mainnet</td></tr>
+                    <tr><td>Monad</td><td>143</td><td>Mainnet</td></tr>
                     <tr><td>Abstract</td><td>2741</td><td>Mainnet</td></tr>
+                    <tr><td>Soneium</td><td>1868</td><td>Mainnet</td></tr>
+                    <tr><td>GOAT Network</td><td>2345</td><td>Mainnet</td></tr>
+                    <tr><td>Metis</td><td>1088</td><td>Mainnet</td></tr>
+                    <tr><td>Hedera</td><td>295</td><td>Mainnet</td></tr>
+                    <tr><td>SKALE Base</td><td>1187947933</td><td>Mainnet</td></tr>
+                    <tr><td>Shape</td><td>360</td><td>Mainnet</td></tr>
                   </tbody>
                 </table></div>
               </div>
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
                   <strong className="text-vw-purple">Testnets available too.</strong>{" "}
-                  Most deployed chains also have testnet deployments (Arbitrum Sepolia, Optimism Sepolia, Avalanche Fuji, etc.).
-                  All use the same deterministic contract addresses. See the skill reference for full details.
+                  Many deployed chains also have testnet deployments (Arbitrum Sepolia, Optimism Sepolia, Polygon Amoy, Monad Testnet, and more).
+                  All use the same deterministic contract addresses. See the skill reference for the full matrix.
                 </p>
               </div>
 
@@ -641,8 +710,7 @@ export default function DocsPage() {
                   <strong className="text-vw-purple">Note:</strong> The three IPFS variables (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) are
                   mutually exclusive &mdash; you only need the one that matches your provider.
                   IPFS is only required for write operations that store metadata (agent registration, feedback with text).
-                  Setting env vars is optional &mdash; if not set, the agent will prompt for credentials inline during the operation.
-                  If a credential is not set when needed, the agent will prompt for it inline (not persisted).
+                  If a required credential is missing, configure it in your shell, secret manager, or <code>~/.8004skill/.env</code> before retrying.
                 </p>
               </div>
 
@@ -659,7 +727,7 @@ export default function DocsPage() {
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
                 How credentials are resolved: IPFS credentials (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) are
                 read from environment variables. You can set them in <code>~/.8004skill/.env</code> (loaded automatically),
-                export them in your shell, or let the agent prompt you inline when needed. Any tool that injects
+                export them in your shell, or inject them via a secret manager. Any tool that injects
                 env vars (1Password CLI, direnv, etc.) also works.
               </p>
               <p className="text-sm text-foreground/70">
@@ -700,7 +768,7 @@ export default function DocsPage() {
                       <td>Config</td>
                       <td><code>~/.8004skill/config.json</code></td>
                       <td>Persistent</td>
-                      <td>Chain/RPC/WC project ID (NO secrets)</td>
+                      <td>Chain/RPC/IPFS provider/WC project ID + registrations (NO secrets)</td>
                     </tr>
                     <tr>
                       <td>TX signing</td>
@@ -746,14 +814,14 @@ export default function DocsPage() {
                   <li><strong className="text-red-400">NEVER</strong> accept, request, or prompt user to share private keys, mnemonics, or passwords in chat</li>
                   <li><strong className="text-red-400">NEVER</strong> display or echo secrets</li>
                   <li><strong className="text-red-400">NEVER</strong> include secrets in command arguments</li>
-                  <li>Secrets must be set in environment or <code>~/.8004skill/.env</code> BEFORE skill invocation</li>
+                  <li>Secrets should be set in environment or <code>~/.8004skill/.env</code> before the write operation starts</li>
                   <li>If user accidentally pastes a secret, warn immediately and advise key rotation</li>
                 </ul>
               </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">OpenClaw-Specific</h3>
               <p className="text-sm text-foreground/70 leading-relaxed">
-                When running inside OpenClaw: IPFS secrets must be configured via the OpenClaw skill config <code>env</code> field.
+                When running inside OpenClaw: prefer the skill config <code>env</code> field or <code>~/.8004skill/.env</code> for IPFS secrets.
                 Command strings appear in exec approval UIs and session event logs &mdash; any secret in a command string
                 is permanently recorded. Session logs persist after the session ends.
               </p>
@@ -846,7 +914,7 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">As of agent0-sdk v1.5.3, March 2026.</strong>
+                  <strong className="text-vw-purple">As of agent0-sdk v1.6.0, March 2026.</strong>
                 </p>
               </div>
 
@@ -855,7 +923,7 @@ export default function DocsPage() {
                 <li><strong className="text-vw-purple">Runtime:</strong> Node.js &ge; 22.0.0</li>
                 <li><strong className="text-vw-purple">Language:</strong> TypeScript (ESM-only)</li>
                 <li><strong className="text-vw-purple">Execution:</strong> npx tsx (no build step at runtime)</li>
-                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk ^1.5.3, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
+                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk v1.6.0 API surface, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
               </ul>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Data Flow</h3>
@@ -869,7 +937,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">I/O Contract</h3>
               <p className="text-sm text-foreground/70 mb-3">
-                All 15 scripts follow the same I/O protocol:
+                All 18 scripts follow the same I/O protocol:
               </p>
               <div className="overflow-x-auto mb-6">
                 <div className="table-wrapper"><table>
@@ -890,7 +958,7 @@ export default function DocsPage() {
                 <li>ESM-only TypeScript project</li>
                 <li>No build step at runtime (tsx compiles on-the-fly)</li>
                 <li>Stateless scripts (each invocation is standalone)</li>
-                <li>15 TypeScript scripts + 3 shared library files</li>
+                <li>18 TypeScript scripts + 3 shared library files</li>
                 <li>State lives in <code>~/.8004skill/config.json</code> and environment variables</li>
                 <li>Distributed via <code>npx skills add</code> (Skills CLI) or <code>npx 8004skill install</code></li>
                 <li>CLI entry point (<code>bin/cli.mjs</code>) is vanilla ESM JS &mdash; runs via npx without tsx</li>
@@ -902,7 +970,7 @@ export default function DocsPage() {
                 Three lightweight registries accessed via <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a>:
               </p>
               <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-2 mb-4">
-                <li><strong className="text-vw-purple">Identity Registry (ERC-721):</strong> Agent IDs as NFTs. Each token references a registration file (IPFS/HTTP) with name, description, endpoints, and capabilities. Supports MCP, A2A, ENS, OASF endpoint types.</li>
+                <li><strong className="text-vw-purple">Identity Registry (ERC-721):</strong> Agent IDs as NFTs. Each token references a registration file (IPFS/HTTP/on-chain data URI) with name, description, endpoints, and capabilities. Supports MCP, A2A, ENS, OASF endpoint types.</li>
                 <li><strong className="text-vw-purple">Reputation Registry:</strong> On-chain feedback with ratings (-100 to 100), tags, and optional IPFS-stored text. Feedback is immutable once submitted (can only be revoked, not edited). Agent owners can append responses.</li>
                 <li><strong className="text-vw-purple">Validation Registry:</strong> Third-party validator attestations for trust models (reputation, crypto-economic, TEE attestation).</li>
               </ol>

@@ -76,7 +76,7 @@ export default function Image() {
             display: "flex",
           }}
         >
-          ERC-8004 &middot; Ethereum &middot; Polygon &middot; Sepolia
+          ERC-8004 &middot; EVM Chains &middot; WalletConnect
         </div>
       </div>
     ),

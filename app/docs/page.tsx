@@ -38,7 +38,7 @@ export default function DocsPage() {
 
           <article className="docs-content min-w-0 flex-1">
             {/* Quick Start */}
-            <section id="quick-start" className="mb-16">
+            <section id="quick-start" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Quick Start
               </h2>
@@ -71,7 +71,7 @@ export default function DocsPage() {
             </section>
 
             {/* Installation */}
-            <section id="installation" className="mb-16">
+            <section id="installation" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Installation
               </h2>
@@ -106,7 +106,7 @@ export default function DocsPage() {
             </section>
 
             {/* Agent Setup */}
-            <section id="agent-setup" className="mb-16">
+            <section id="agent-setup" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Agent Setup
               </h2>
@@ -148,7 +148,7 @@ export default function DocsPage() {
             </section>
 
             {/* Configuration */}
-            <section id="configuration" className="mb-16">
+            <section id="configuration" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Configuration
               </h2>
@@ -221,7 +221,7 @@ export default function DocsPage() {
             </section>
 
             {/* Operations Reference */}
-            <section id="operations" className="mb-16">
+            <section id="operations" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Operations Reference
               </h2>
@@ -547,7 +547,7 @@ export default function DocsPage() {
             </section>
 
             {/* Supported Chains */}
-            <section id="supported-chains" className="mb-16">
+            <section id="supported-chains" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Supported Chains
               </h2>
@@ -651,7 +651,7 @@ export default function DocsPage() {
             </section>
 
             {/* Environment Variables */}
-            <section id="environment-variables" className="mb-16">
+            <section id="environment-variables" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Environment Variables
               </h2>
@@ -741,7 +741,7 @@ export default function DocsPage() {
             </section>
 
             {/* Security Model */}
-            <section id="security-model" className="mb-16">
+            <section id="security-model" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Security Model
               </h2>
@@ -853,7 +853,7 @@ export default function DocsPage() {
             </section>
 
             {/* X402 Payment Integration */}
-            <section id="x402-integration" className="mb-16">
+            <section id="x402-integration" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 X402 Payment Integration
               </h2>
@@ -932,7 +932,7 @@ export default function DocsPage() {
             </section>
 
             {/* Architecture */}
-            <section id="architecture" className="mb-16">
+            <section id="architecture" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Architecture
               </h2>
@@ -1013,7 +1013,7 @@ export default function DocsPage() {
             </section>
 
             {/* Troubleshooting */}
-            <section id="troubleshooting" className="mb-16">
+            <section id="troubleshooting" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 Troubleshooting
               </h2>
@@ -1093,7 +1093,7 @@ export default function DocsPage() {
             </section>
 
             {/* CLI Management */}
-            <section id="cli-management" className="mb-16">
+            <section id="cli-management" className="mb-16 scroll-mt-36">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-vw-pink mb-6" style={{ textShadow: "0 0 10px rgba(255,113,206,0.5)" }}>
                 CLI Management
               </h2>

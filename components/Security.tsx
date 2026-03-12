@@ -20,6 +20,11 @@ export default function Security() {
       title: "Zero Secret Storage",
       desc: "Config stores chain, RPC, IPFS provider, WalletConnect ID, and registration metadata. No secrets, mnemonics, or passwords are stored.",
     },
+    {
+      icon: "⚠️",
+      title: "Untrusted Data Protection",
+      desc: "On-chain agent data is treated as untrusted external content. Prompt-injection payloads in names, descriptions, or metadata are flagged and rendered safely — never executed.",
+    },
   ];
 
   return (

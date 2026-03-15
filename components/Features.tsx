@@ -65,12 +65,22 @@ export default function Features() {
       title: "SDK Diagnostics",
       desc: "Inspect registry addresses, read-only status, and chain/IPFS/subgraph availability",
     },
+    {
+      emoji: "💬",
+      title: "A2A Messaging",
+      desc: "Send messages to agents, manage tasks, and handle A2A workflows with built-in x402 payment support.",
+    },
+    {
+      emoji: "💳",
+      title: "X402 Payment",
+      desc: "Execute HTTP requests with automatic x402 payment handling — approve amounts, pay, and receive responses.",
+    },
   ];
 
   return (
     <section id="features" className="scroll-mt-24 pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-4 text-vw-pink" style={{ textShadow: "0 0 10px #FF71CE" }}>
-        13 Core Operations
+        15 Core Operations
       </h2>
       <p className="text-center text-foreground/60 mb-12 max-w-xl mx-auto text-sm">
         Everything you need to manage AI agents on-chain, through natural conversation.

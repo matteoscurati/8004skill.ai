@@ -2,8 +2,8 @@ export default function Security() {
   const features = [
     {
       icon: "🔐",
-      title: "No Private Keys Touch the Agent",
-      desc: "All signing operations use WalletConnect v2. The agent never holds private keys — signing happens entirely on your device.",
+      title: "WalletConnect Secure Signing",
+      desc: "Primary signing uses WalletConnect v2 — signing happens in your wallet app. PRIVATE_KEY in ~/.8004skill/.env is available as an optional headless alternative for x402 payments and automated workflows.",
     },
     {
       icon: "📱",
@@ -17,8 +17,8 @@ export default function Security() {
     },
     {
       icon: "🚫",
-      title: "Zero Secret Storage",
-      desc: "Config stores chain, RPC, IPFS provider, WalletConnect ID, and registration metadata. No secrets, mnemonics, or passwords are stored.",
+      title: "Minimal Secret Exposure",
+      desc: "Config stores chain, RPC, IPFS provider, WalletConnect ID, and registration metadata — no secrets. ~/.8004skill/.env optionally holds PRIVATE_KEY for headless signing, protected with chmod 600.",
     },
     {
       icon: "⚠️",

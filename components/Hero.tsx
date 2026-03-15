@@ -35,7 +35,7 @@ export default function Hero() {
           The AI Agent Skill for the On-Chain Agent Economy
         </p>
         <span className="inline-block text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-vw-green/40 text-vw-green/80 mb-4">
-          v2.2.0
+          v2.3.0
         </span>
 
         <p className="text-sm sm:text-base text-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">

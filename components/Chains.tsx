@@ -10,7 +10,7 @@ export default function Chains() {
   const deployed = [
     { name: "Arbitrum One", id: 42161 },
     { name: "Optimism", id: 10 },
-    { name: "Avalanche", id: 43114 },
+    { name: "Avalanche C-Chain", id: 43114 },
     { name: "BSC", id: 56 },
     { name: "Monad", id: 143 },
     { name: "Scroll", id: 534352 },

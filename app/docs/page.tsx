@@ -544,6 +544,75 @@ export default function DocsPage() {
                   and availability of IPFS and subgraph clients. Useful for debugging configuration issues.
                 </p>
               </div>
+
+              {/* A2A Messaging */}
+              <div className="mb-10">
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">A2A Messaging</h3>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Send messages to agents, manage tasks, and handle A2A workflows with built-in x402 payment support.
+                </p>
+                <div className="gradient-border p-4 mb-3">
+                  <div className="text-xs space-y-2">
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;message agent&quot;, &quot;send A2A message&quot;, &quot;list tasks&quot;, &quot;check task status&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">Agent ID with A2A endpoint. Write actions: PRIVATE_KEY for x402 payments</span></div>
+                    <div><strong className="text-vw-purple">Type:</strong> <span className="text-foreground/60">Read/Write</span></div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Uses <code>sdk.createA2AClient()</code> to connect to an agent&apos;s A2A endpoint. Send messages via <code>agent.messageA2A()</code>,
+                  list active tasks with <code>agent.listTasks()</code>, and load task details with <code>agent.loadTask()</code>.
+                  When the target endpoint requires x402 payment, the skill automatically handles payment negotiation using
+                  <code> sdk.fetchWithX402()</code> under the hood.
+                </p>
+                <h4 className="text-sm font-bold text-vw-green mb-2">Sub-operations</h4>
+                <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
+                  <li><strong>Send Message</strong> &mdash; Send a text message to an agent&apos;s A2A endpoint and receive the response</li>
+                  <li><strong>List Tasks</strong> &mdash; List all active tasks for an agent conversation (read-only)</li>
+                  <li><strong>Load Task</strong> &mdash; Retrieve detailed status and history of a specific task by ID</li>
+                  <li><strong>Cancel Task</strong> &mdash; Cancel an active task by ID</li>
+                </ul>
+                <div className="gradient-border p-4 mt-3">
+                  <p className="text-xs text-foreground/60">
+                    <strong className="text-vw-purple">x402 Auto-Payment:</strong> If the A2A endpoint returns HTTP 402, the skill prompts for approval of the payment amount,
+                    signs a payment transaction via the configured private key, and retries the request with the payment header attached.
+                  </p>
+                </div>
+              </div>
+
+              {/* X402 Payment */}
+              <div className="mb-10">
+                <h3 className="text-lg font-heading font-bold text-vw-cyan mb-2">X402 Payment</h3>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Execute HTTP requests with automatic x402 payment handling &mdash; approve amounts, pay, and receive responses.
+                </p>
+                <div className="gradient-border p-4 mb-3">
+                  <div className="text-xs space-y-2">
+                    <div><strong className="text-vw-purple">Triggers:</strong> <span className="text-foreground/60">&quot;pay agent&quot;, &quot;x402 request&quot;, &quot;fetch with payment&quot;, &quot;call paid endpoint&quot;</span></div>
+                    <div><strong className="text-vw-purple">Requirements:</strong> <span className="text-foreground/60">WalletConnect session or PRIVATE_KEY, target URL</span></div>
+                    <div><strong className="text-vw-purple">Type:</strong> <span className="text-foreground/60">Write</span></div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70 mb-3">
+                  Uses <code>sdk.request()</code> and <code>sdk.fetchWithX402()</code> to make HTTP requests to x402-enabled endpoints.
+                  When the server responds with HTTP 402 Payment Required, the skill extracts the payment requirements from the response,
+                  presents the amount to the user for approval, signs the payment, and retries the request with the payment proof attached.
+                </p>
+                <h4 className="text-sm font-bold text-vw-green mb-2">Workflow</h4>
+                <ol className="list-decimal list-inside text-sm text-foreground/70 space-y-1">
+                  <li>Send initial HTTP request to the target URL</li>
+                  <li>If 402 response, parse payment requirements (amount, token, recipient)</li>
+                  <li>Display payment details and request user approval</li>
+                  <li>Sign payment transaction using <code>PRIVATE_KEY</code></li>
+                  <li>Retry the request with payment header &mdash; receive the response</li>
+                </ol>
+                <div className="gradient-border p-4 mt-3 border-red-400/30">
+                  <p className="text-xs text-red-400">
+                    <strong>Security:</strong> The <code>PRIVATE_KEY</code> environment variable is required for x402 payment signing.
+                    It should be a funded wallet key set via <code>~/.8004skill/.env</code> or your shell environment.
+                    Never share this key or commit it to source control. The skill always prompts for user approval before signing any payment.
+                  </p>
+                </div>
+              </div>
             </section>
 
             {/* Supported Chains */}
@@ -554,7 +623,7 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.6.0.</strong>{" "}
+                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.7.0.</strong>{" "}
                   5 chains with built-in defaults, plus additional deployed chains available with manual config.
                 </p>
               </div>
@@ -687,6 +756,16 @@ export default function DocsPage() {
                       <td>URL of IPFS node API</td>
                     </tr>
                     <tr>
+                      <td><code>PRIVATE_KEY</code></td>
+                      <td>X402 payments, A2A messaging with x402</td>
+                      <td>Private key for signing x402 payment transactions. Must be a funded wallet.</td>
+                    </tr>
+                    <tr>
+                      <td><code>OVERRIDE_RPC_&#123;chainId&#125;</code></td>
+                      <td>Custom RPC per chain (optional)</td>
+                      <td>Override RPC URL for a specific chain ID, e.g. <code>OVERRIDE_RPC_8453</code> for Base Mainnet</td>
+                    </tr>
+                    <tr>
                       <td><code>DEBUG</code></td>
                       <td>Debugging (optional)</td>
                       <td>Set to 1 for verbose logging</td>
@@ -730,7 +809,8 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Secret Management Recommendations</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                How credentials are resolved: IPFS credentials (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) are
+                How credentials are resolved: IPFS credentials (<code>PINATA_JWT</code>, <code>FILECOIN_PRIVATE_KEY</code>, <code>IPFS_NODE_URL</code>) and
+                <code> PRIVATE_KEY</code> (for x402 payments) are
                 read from environment variables. You can set them in <code>~/.8004skill/.env</code> (loaded automatically),
                 export them in your shell, or inject them via a secret manager. Any tool that injects
                 env vars (1Password CLI, direnv, etc.) also works.
@@ -748,8 +828,8 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">WalletConnect Signing</h3>
               <p className="text-sm text-foreground/70 mb-4 leading-relaxed">
-                All signing operations use WalletConnect v2. The agent <strong>never holds private keys</strong> &mdash; signing
-                happens entirely on your device in your wallet app.
+                Primary signing uses WalletConnect v2 &mdash; signing happens in your wallet app.
+                <code>PRIVATE_KEY</code> in <code>~/.8004skill/.env</code> is available as a headless alternative for x402 payments and automated workflows.
               </p>
 
               <div className="overflow-x-auto mb-6">
@@ -880,7 +960,7 @@ export default function DocsPage() {
               <p className="text-sm text-foreground/70 leading-relaxed mb-3">
                 Pass <code>--x402 true</code> when registering or updating an agent to flag it as x402-capable.
               </p>
-              <CodeBlock code="npx tsx scripts/update-agent.ts --agent-id 8453:42 --chain-id 8453 --rpc-url https://mainnet.base.org --ipfs pinata --x402 true" language="bash" />
+              <CodeBlock code="npx tsx scripts/update-agent.ts --agent-id 8453:42 --chain-id 8453 --rpc-url https://mainnet.base.org --storage ipfs --ipfs pinata --x402 true" language="bash" />
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Payment Readiness</h3>
               <p className="text-sm text-foreground/70 leading-relaxed mb-3">
@@ -898,6 +978,20 @@ export default function DocsPage() {
                 Check readiness with the x402-status script:
               </p>
               <CodeBlock code="npx tsx scripts/x402-status.ts --agent-id 8453:42 --chain-id 8453 --rpc-url https://mainnet.base.org" language="bash" />
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">Direct X402 Requests</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed mb-3">
+                The new X402 Payment operation (v2.3.0) allows you to make direct HTTP requests to x402-enabled endpoints.
+                The skill uses <code>sdk.request()</code> and <code>sdk.fetchWithX402()</code> to handle the full payment lifecycle automatically.
+                Requires <code>PRIVATE_KEY</code> in environment.
+              </p>
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">A2A + X402</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed mb-3">
+                The A2A Messaging operation (v2.3.0) has built-in x402 support. When an agent&apos;s A2A endpoint returns HTTP 402,
+                the skill seamlessly handles payment negotiation via <code>sdk.createA2AClient()</code> and <code>sdk.fetchWithX402()</code>.
+                This enables pay-per-message interactions between agents.
+              </p>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">awal CLI Companion</h3>
               <div className="gradient-border p-4 mb-4">
@@ -926,7 +1020,7 @@ export default function DocsPage() {
                   <li><strong className="text-vw-purple">Enable x402</strong>: <code>--x402 true</code> on register or update</li>
                   <li><strong className="text-vw-purple">Set wallet</strong>: Operation 7 (receives USDC payments)</li>
                   <li><strong className="text-vw-purple">Monetize</strong>: use <code>x402-express</code> middleware on your server</li>
-                  <li><strong className="text-vw-purple">Discover + pay</strong>: clients use <code>awal</code> to find and pay your agent</li>
+                  <li><strong className="text-vw-purple">Discover + pay</strong>: clients use <code>awal</code> or the X402 Payment operation to find and pay your agent</li>
                 </ol>
               </div>
             </section>
@@ -939,7 +1033,7 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">As of agent0-sdk v1.6.0, March 2026.</strong>
+                  <strong className="text-vw-purple">As of agent0-sdk v1.7.0, March 2026.</strong>
                 </p>
               </div>
 
@@ -948,7 +1042,7 @@ export default function DocsPage() {
                 <li><strong className="text-vw-purple">Runtime:</strong> Node.js &ge; 22.0.0</li>
                 <li><strong className="text-vw-purple">Language:</strong> TypeScript (ESM-only)</li>
                 <li><strong className="text-vw-purple">Execution:</strong> npx tsx (no build step at runtime)</li>
-                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk v1.6.0 API surface, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
+                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk v1.7.0 API surface, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
               </ul>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Data Flow</h3>
@@ -962,7 +1056,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">I/O Contract</h3>
               <p className="text-sm text-foreground/70 mb-3">
-                All 18 scripts follow the same I/O protocol:
+                All 20 scripts follow the same I/O protocol:
               </p>
               <div className="overflow-x-auto mb-6">
                 <div className="table-wrapper"><table>
@@ -983,11 +1077,33 @@ export default function DocsPage() {
                 <li>ESM-only TypeScript project</li>
                 <li>No build step at runtime (tsx compiles on-the-fly)</li>
                 <li>Stateless scripts (each invocation is standalone)</li>
-                <li>18 TypeScript scripts + 3 shared library files</li>
+                <li>20 TypeScript scripts + 3 shared library files</li>
                 <li>State lives in <code>~/.8004skill/config.json</code> and environment variables</li>
                 <li>Distributed via <code>npx skills add</code> (Skills CLI) or <code>npx 8004skill install</code></li>
                 <li>CLI entry point (<code>bin/cli.mjs</code>) is vanilla ESM JS &mdash; runs via npx without tsx</li>
               </ul>
+
+              <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">SDK API Surface</h3>
+              <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
+                Key methods from agent0-sdk v1.7.0 used by 8004skill scripts:
+              </p>
+              <div className="overflow-x-auto mb-6">
+                <div className="table-wrapper"><table>
+                  <thead>
+                    <tr><th>Method</th><th>Purpose</th><th>Used By</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>sdk.searchAgents()</code></td><td>Search agents with filters and semantic queries</td><td>Search</td></tr>
+                    <tr><td><code>sdk.getAgent()</code></td><td>Fetch indexed agent summary from subgraph</td><td>Get Summary</td></tr>
+                    <tr><td><code>sdk.request()</code></td><td>Make HTTP requests with built-in x402 payment handling</td><td>X402 Payment</td></tr>
+                    <tr><td><code>sdk.fetchWithX402()</code></td><td>Fetch with automatic x402 payment negotiation and retry</td><td>X402 Payment, A2A Messaging</td></tr>
+                    <tr><td><code>sdk.createA2AClient()</code></td><td>Create an A2A protocol client for agent communication</td><td>A2A Messaging</td></tr>
+                    <tr><td><code>agent.messageA2A()</code></td><td>Send a message to an agent via A2A protocol</td><td>A2A Messaging</td></tr>
+                    <tr><td><code>agent.listTasks()</code></td><td>List active tasks for an A2A conversation</td><td>A2A Messaging</td></tr>
+                    <tr><td><code>agent.loadTask()</code></td><td>Load detailed task status and history by ID</td><td>A2A Messaging</td></tr>
+                  </tbody>
+                </table></div>
+              </div>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">ERC-8004 Protocol</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
@@ -1000,7 +1116,7 @@ export default function DocsPage() {
                 <li><strong className="text-vw-purple">Validation Registry:</strong> Third-party validator attestations for trust models (reputation, crypto-economic, TEE attestation).</li>
               </ol>
               <p className="text-sm text-foreground/70 mb-3">
-                All contracts use deterministic CREATE2 deployment &mdash; same addresses on every chain. Currently deployed on 18+ chains.
+                All contracts use deterministic CREATE2 deployment &mdash; same addresses on every chain. Currently deployed on 25+ chains.
               </p>
               <p className="text-sm text-foreground/70 mb-3">
                 <strong>Global Agent ID Format:</strong> <code>eip155:&#123;chainId&#125;:&#123;identityRegistryAddress&#125;:&#123;tokenId&#125;</code>

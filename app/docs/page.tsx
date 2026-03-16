@@ -559,10 +559,9 @@ export default function DocsPage() {
                   </div>
                 </div>
                 <p className="text-sm text-foreground/70 mb-3">
-                  Uses <code>sdk.createA2AClient()</code> to connect to an agent&apos;s A2A endpoint. Send messages via <code>agent.messageA2A()</code>,
-                  list active tasks with <code>agent.listTasks()</code>, and load task details with <code>agent.loadTask()</code>.
-                  When the target endpoint requires x402 payment, the skill automatically handles payment negotiation using
-                  <code> sdk.fetchWithX402()</code> under the hood.
+                  Loads the target agent via <code>sdk.loadAgent()</code> and calls A2A methods directly: <code>agent.messageA2A()</code> to send messages,
+                  <code>agent.listTasks()</code> to list active tasks, and <code>agent.loadTask()</code> to load task details.
+                  When the target endpoint requires x402 payment, the skill handles payment negotiation automatically.
                 </p>
                 <h4 className="text-sm font-bold text-vw-green mb-2">Sub-operations</h4>
                 <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
@@ -623,7 +622,7 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.7.0.</strong>{" "}
+                  <strong className="text-vw-purple">Powered by <a href="https://www.ag0.xyz/" target="_blank" rel="noopener noreferrer" className="text-vw-cyan hover:underline">agent0 SDK</a> v1.7.1.</strong>{" "}
                   5 chains with built-in defaults, plus additional deployed chains available with manual config.
                 </p>
               </div>
@@ -989,7 +988,7 @@ export default function DocsPage() {
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3 mt-6">A2A + X402</h3>
               <p className="text-sm text-foreground/70 leading-relaxed mb-3">
                 The A2A Messaging operation (v2.3.0) has built-in x402 support. When an agent&apos;s A2A endpoint returns HTTP 402,
-                the skill seamlessly handles payment negotiation via <code>sdk.createA2AClient()</code> and <code>sdk.fetchWithX402()</code>.
+                the skill seamlessly handles payment negotiation via the A2A payment flow built into <code>agent.messageA2A()</code>.
                 This enables pay-per-message interactions between agents.
               </p>
 
@@ -1033,7 +1032,7 @@ export default function DocsPage() {
 
               <div className="gradient-border p-4 mb-6">
                 <p className="text-xs text-foreground/60">
-                  <strong className="text-vw-purple">As of agent0-sdk v1.7.0, March 2026.</strong>
+                  <strong className="text-vw-purple">As of agent0-sdk v1.7.1, March 2026.</strong>
                 </p>
               </div>
 
@@ -1042,7 +1041,7 @@ export default function DocsPage() {
                 <li><strong className="text-vw-purple">Runtime:</strong> Node.js &ge; 22.0.0</li>
                 <li><strong className="text-vw-purple">Language:</strong> TypeScript (ESM-only)</li>
                 <li><strong className="text-vw-purple">Execution:</strong> npx tsx (no build step at runtime)</li>
-                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk v1.7.0 API surface, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
+                <li><strong className="text-vw-purple">Dependencies:</strong> agent0-sdk v1.7.1 API surface, @walletconnect/ethereum-provider, qrcode-terminal, tsx</li>
               </ul>
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">Data Flow</h3>
@@ -1085,7 +1084,7 @@ export default function DocsPage() {
 
               <h3 className="text-lg font-heading font-bold text-vw-cyan mb-3">SDK API Surface</h3>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Key methods from agent0-sdk v1.7.0 used by 8004skill scripts:
+                Key methods from agent0-sdk v1.7.1 used by 8004skill scripts:
               </p>
               <div className="overflow-x-auto mb-6">
                 <div className="table-wrapper"><table>
@@ -1097,7 +1096,7 @@ export default function DocsPage() {
                     <tr><td><code>sdk.getAgent()</code></td><td>Fetch indexed agent summary from subgraph</td><td>Get Summary</td></tr>
                     <tr><td><code>sdk.request()</code></td><td>Make HTTP requests with built-in x402 payment handling</td><td>X402 Payment</td></tr>
                     <tr><td><code>sdk.fetchWithX402()</code></td><td>Fetch with automatic x402 payment negotiation and retry</td><td>X402 Payment, A2A Messaging</td></tr>
-                    <tr><td><code>sdk.createA2AClient()</code></td><td>Create an A2A protocol client for agent communication</td><td>A2A Messaging</td></tr>
+                    <tr><td><code>sdk.loadAgent()</code></td><td>Load agent by ID (A2A methods available on the returned Agent)</td><td>Load, A2A Messaging</td></tr>
                     <tr><td><code>agent.messageA2A()</code></td><td>Send a message to an agent via A2A protocol</td><td>A2A Messaging</td></tr>
                     <tr><td><code>agent.listTasks()</code></td><td>List active tasks for an A2A conversation</td><td>A2A Messaging</td></tr>
                     <tr><td><code>agent.loadTask()</code></td><td>Load detailed task status and history by ID</td><td>A2A Messaging</td></tr>

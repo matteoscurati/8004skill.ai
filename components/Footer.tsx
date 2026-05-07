@@ -29,6 +29,11 @@ export default function Footer() {
                   Documentation
                 </a>
               </li>
+              <li>
+                <a href="/privacy" className="text-foreground/60 hover:text-vw-cyan transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
           <div>

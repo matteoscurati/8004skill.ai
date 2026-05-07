@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: "/_a/script.js", destination: "https://eu.umami.is/script.js" },
+      { source: "/_a/script.js", destination: "https://cloud.umami.is/script.js" },
       { source: "/_a/api/send", destination: "https://eu.umami.is/api/send" },
     ];
   },
